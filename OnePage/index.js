@@ -1,1 +1,0 @@
-console.log("GIS Project avviato correttamente!");
