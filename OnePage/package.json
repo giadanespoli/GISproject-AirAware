@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  "start": "node index.js"
+    "start": "lite-server"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
 }
