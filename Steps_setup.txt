@@ -23,3 +23,31 @@ modify package.json like this:
 3. npm install lite-server --save-dev
 
 4. npm start
+
+## Working with Git ##
+
+# Start on main branch and make sure it is up to date
+| git checkout main
+| git pull origin main
+
+# Create a new branch off of main
+| git checkout -b your-feature-branch-main
+
+# Push the new branch to GitHub
+| git push -u origin your-feature-branch-main
+
+# Switch to your branch for editing
+| git checkout your-feature-branch-main
+
+- Edit your files in VS Code
+
+# Stage, commit and push your changes
+| git add . (the . specifies that it will stage changes to all updated files)
+| git commit -m "Add a short description of what you changed"
+| git push (pushes them to remote)
+
+# Merge your branch into main
+| git checkout main
+| git pull origin main
+| git merge your-feature-branch-name
+| git push origin main
