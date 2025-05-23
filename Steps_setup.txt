@@ -1,0 +1,25 @@
+
+
+1. npm init -y
+
+modify package.json like this: 
+{
+  "name": "GIS project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "lite-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
+
+2. Create in the folder a file called index.js
+
+3. npm install lite-server --save-dev
+
+4. npm start
