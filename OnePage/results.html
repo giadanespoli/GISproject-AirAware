@@ -76,6 +76,12 @@
         </div>
 
         <div class="row gy-4">
+          <!-- Interactive No2 graph -->
+          <div class="col-12" data-aos="fade-up">
+            <h4>Media NO2 per anno e land cover</h4>
+            <div id="no2-bar-chart" style="width: 100%; height: 400px;"></div>
+          </div>
+
           <div class="col-lg-6" data-aos="fade-up">
             <h4>Particulate Matter Trends</h4>
             <img src="assets/img/results-chart1.png" class="img-fluid" alt="Chart showing particulate matter trends over time">
@@ -166,8 +172,58 @@
   <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
 
+   <!-- Plotly JS -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+   <!-- yearly NO2 graph -->
+  <script>
+    const years = ['2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'];
+
+    const landCovers = ['Forest', 'Urban', 'Agriculture', 'Water', 'Wetland', 'Barren'];
+    const colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b'];
+
+    // CHANGE DATA
+    const data = landCovers.map((lc, i) => ({
+      x: years,
+      y: years.map(() => Math.random() * 50 + 10),
+      name: lc,
+      type: 'bar',
+      marker: { color: colors[i] }
+    }));
+
+    const layout = {
+      barmode: 'stack',
+      title: 'Yearly NO2 mean',
+      xaxis: { title: 'Year' },
+      yaxis: { title: 'Mean NO2' }
+    };
+
+    Plotly.newPlot('no2-bar-chart', data, layout);
+
+    const chartDiv = document.getElementById('no2-bar-chart');
+    let currentFilter = null;
+
+    chartDiv.on('plotly_legendclick', (event) => {
+  const clickedLandCover = event.curveNumber !== undefined ? data[event.curveNumber].name : null;
+
+  if (!clickedLandCover) return false;
+
+  if (currentFilter === clickedLandCover) {
+    // Goes back to main graph
+    currentFilter = null;
+    Plotly.react('no2-bar-chart', data, layout);
+  } else {
+    currentFilter = clickedLandCover;
+    const filteredData = data.filter(d => d.name === currentFilter);
+    Plotly.react('no2-bar-chart', filteredData, layout);
+  }
+
+  return false; 
+});
+  </script>
 
 </body>
 </html>
