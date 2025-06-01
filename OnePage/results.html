@@ -26,6 +26,9 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- GN: load the D3.js library -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 
 <body class="results-page">
@@ -68,33 +71,58 @@
 
     <!-- Results Section -->
     <section id="results" class="service-details section">
+
+      <!-- GN: Yearly mean histograms -->
       <div class="container">
+
+        <!-- GN: Yearly mean histograms explanation -->
         <div class="row gy-4 mb-4">
           <div class="col-12" data-aos="fade-up">
-            <p>This page presents analysis of the collected air quality data. The charts below illustrate key insights, including temporal trends and the breakdown of pollutant levels.</p>
+            <p>
+              The results page is divided into three sections, one for each of the studied pollutants.<br>
+              By default, each section displays a histogram where the bars represent the total annual average value, broken down by all land cover classes. 
+              The bars are stacked, with each segment indicating the contribution of a specific land cover type to the total value across the study area.<br>
+              A dot on top of each bar marks the dominant exposure class for that pollutant in that particular year.
+            </p>
+            <p>
+              You can click on a land cover category in the legend to isolate and view the annual average values for that specific land cover only.<br>
+              Clicking the category again will restore the full stacked bar view.
+            </p>
+            <p>
+              Additionally, clicking on a specific year within a histogram will display two pie charts:<br>
+              - One showing the percentage distribution of land cover types for that pollutant in the selected year.<br>
+              - The other showing the percentage distribution of exposure classes for the same year.<br>
+              Clicking the year again will return to the full stacked bar view.
+            </p>
           </div>
         </div>
 
-        <div class="row gy-4">
-          <!-- Interactive No2 graph -->
-          <div class="col-12" data-aos="fade-up">
-            <h4>Media NO2 per anno e land cover</h4>
-            <div id="no2-bar-chart" style="width: 100%; height: 400px;"></div>
-          </div>
-
-          <div class="col-lg-6" data-aos="fade-up">
-            <h4>Particulate Matter Trends</h4>
-            <img src="assets/img/results-chart1.png" class="img-fluid" alt="Chart showing particulate matter trends over time">
-            <p>Particulate matter (PM2.5 and PM10) levels show daily fluctuations with notable peaks on certain days. The trend indicates periods of poorer air quality, possibly due to specific events or weather conditions. Overall, average PM levels occasionally approached or exceeded recommended limits.</p>
-          </div>
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-            <h4>Pollutant Level Breakdown</h4>
-            <img src="assets/img/results-chart2.png" class="img-fluid" alt="Chart showing breakdown of pollutant levels">
-            <p>This chart compares the average concentrations of key pollutants. PM2.5 constitutes the largest share, followed by PM10 and NO<sub>2</sub>, while O<sub>3</sub> levels are comparatively lower. This suggests that particulate matter is the dominant air quality concern in the area.</p>
-          </div>
+        <!-- GN: NO2 graphs -->
+        <div class="section-title text-center" style="margin-bottom: 0; margin-top: 20px;">
+          <h3 style="margin-bottom: 0;">NO<sub>2</sub></h3>
         </div>
-      </div>
+        <div class="row gy-1 justify-content-center">
+          <div id="no2-bar-chart"></div>
+        </div>
+
+        <!-- GN: pm2p5 graphs -->
+        <div class="section-title text-center" style="margin-bottom: 0; margin-top: 20px;">
+          <h3 style="margin-bottom: 0;">PM<sub>2.5</sub></h3>
+        </div>
+        <div class="row gy-1 justify-content-center">
+          <div id="pm2p5-bar-chart"></div>
+        </div>
+
+        <!-- GN: pm10 graphs -->
+        <div class="section-title text-center" style="margin-bottom: 0; margin-top: 20px;">
+          <h3 style="margin-bottom: 0;">PM<sub>10</sub></h3>
+        </div>
+        <div class="row gy-1 justify-content-center">
+          <div id="pm10-bar-chart"></div>
+        </div>
+
+      </div><!-- GN: Yearly mean histograms -->
+
     </section><!-- /Results Section -->
   </main>
 
@@ -172,58 +200,387 @@
   <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
 
-   <!-- Plotly JS -->
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
-
-   <!-- yearly NO2 graph -->
+  
+  <!-- GN: Pollutants yearly means interactive histograms -->
   <script>
-    const years = ['2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'];
-
-    const landCovers = ['Forest', 'Urban', 'Agriculture', 'Water', 'Wetland', 'Barren'];
-    const colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b'];
-
-    // CHANGE DATA
-    const data = landCovers.map((lc, i) => ({
-      x: years,
-      y: years.map(() => Math.random() * 50 + 10),
-      name: lc,
-      type: 'bar',
-      marker: { color: colors[i] }
+  
+  // Pollutants data 
+  const years = ['2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'];
+  const landCovers = ['Agriculture', 'Forest', 'Grassland', 'Wetland', 'Settlement', 'Other']; 
+  const colors = ['#a0b763', '#4c6e53', '#c4e2a7', '#68a3c2', '#6e6e6e', '#b09774'];
+  function generatePollutantData() {
+    return landCovers.map((lc, i) => ({
+      landCover: lc,
+      values: Array.from({ length: 10 }, () => Math.random() * 50 + 13),
+      color: colors[i]
     }));
+  }
+  const vulnerableGroupsByYear = {
+    2013: [ { label: '1', value: 10, color: '#e0f3f8' }, { label: '2', value: 15, color: '#abd9e9' }, { label: '3', value: 20, color: '#74add1' }, { label: '4', value: 25, color: '#4575b4' }, { label: '5', value: 30, color: '#313695' } ],
+    2014: [ { label: '1', value: 15, color: '#e0f3f8' }, { label: '2', value: 20, color: '#abd9e9' }, { label: '3', value: 25, color: '#74add1' }, { label: '4', value: 30, color: '#4575b4' }, { label: '5', value: 10, color: '#313695' } ],
+    2015: [ { label: '1', value: 20, color: '#e0f3f8' }, { label: '2', value: 25, color: '#abd9e9' }, { label: '3', value: 30, color: '#74add1' }, { label: '4', value: 10, color: '#4575b4' }, { label: '5', value: 15, color: '#313695' } ],
+    2016: [ { label: '1', value: 25, color: '#e0f3f8' }, { label: '2', value: 30, color: '#abd9e9' }, { label: '3', value: 10, color: '#74add1' }, { label: '4', value: 15, color: '#4575b4' }, { label: '5', value: 20, color: '#313695' } ],
+    2017: [ { label: '1', value: 30, color: '#e0f3f8' }, { label: '2', value: 10, color: '#abd9e9' }, { label: '3', value: 15, color: '#74add1' }, { label: '4', value: 20, color: '#4575b4' }, { label: '5', value: 25, color: '#313695' } ],
+    2018: [ { label: '1', value: 10, color: '#e0f3f8' }, { label: '2', value: 15, color: '#abd9e9' }, { label: '3', value: 20, color: '#74add1' }, { label: '4', value: 25, color: '#4575b4' }, { label: '5', value: 30, color: '#313695' } ],
+    2019: [ { label: '1', value: 15, color: '#e0f3f8' }, { label: '2', value: 20, color: '#abd9e9' }, { label: '3', value: 25, color: '#74add1' }, { label: '4', value: 30, color: '#4575b4' }, { label: '5', value: 10, color: '#313695' } ],
+    2020: [ { label: '1', value: 20, color: '#e0f3f8' }, { label: '2', value: 25, color: '#abd9e9' }, { label: '3', value: 30, color: '#74add1' }, { label: '4', value: 10, color: '#4575b4' }, { label: '5', value: 15, color: '#313695' } ],
+    2021: [ { label: '1', value: 25, color: '#e0f3f8' }, { label: '2', value: 30, color: '#abd9e9' }, { label: '3', value: 10, color: '#74add1' }, { label: '4', value: 15, color: '#4575b4' }, { label: '5', value: 20, color: '#313695' } ],
+    2022: [ { label: '1', value: 30, color: '#e0f3f8' }, { label: '2', value: 10, color: '#abd9e9' }, { label: '3', value: 15, color: '#74add1' }, { label: '4', value: 20, color: '#4575b4' }, { label: '5', value: 25, color: '#313695' } ],
+  };
+  
+  // Function to create the interactive histogram
+  function drawStackedChart(containerId, data, vulnerableGroupsByYear) {
 
-    const layout = {
-      barmode: 'stack',
-      title: 'Yearly NO2 mean',
-      xaxis: { title: 'Year' },
-      yaxis: { title: 'Mean NO2' }
-    };
+    const margin = { top: 30, right: 30, bottom: 60, left: 30 }; // Margins around the chart for axes and labels
+    const width = 800 - margin.left - margin.right; // Width of the drawing area inside margins
+    const height = 500 - margin.top - margin.bottom; // Height of the drawing area inside margins
 
-    Plotly.newPlot('no2-bar-chart', data, layout);
+    // Container for graphs and legends
+    const container = d3.select(containerId) // Select the div with the ID of the pollutant
+    .style('display', 'flex')  
+    .style('flex-direction', 'row') // Align items in a row
+    .style('justify-content', 'center') // Center content horizontally within the container
+    .style('align-items', 'center') // Center content vertically within the container
+    .style('gap', '15px') // Set space between items 
+    .style('margin', '0 auto'); // Center the entire container horizontally on the page
+    
+    // Container for graphs
+    const graphs = container.append('div')
+    .attr('id', 'chart-area')
+    const svg = graphs.append('svg') // Set position
+    .attr('width', width + margin.left + margin.right) 
+    .attr('height', height + margin.top + margin.bottom)
+    .attr('overflow', 'visible')
+    .append('g')
+    .attr('transform', `translate(${margin.left},${margin.top})`);
 
-    const chartDiv = document.getElementById('no2-bar-chart');
-    let currentFilter = null;
+    // Container for legends
+    const legend = container.append('div')
+    .attr('id', 'legends-area')
+    .style('display', 'flex')
+    .style('flex-direction', 'column') // Align items in a column
+    .style('align-items', 'flex-start') // Align items to the left
+    .style('gap', '20px'); // Space between legends
 
-    chartDiv.on('plotly_legendclick', (event) => {
-  const clickedLandCover = event.curveNumber !== undefined ? data[event.curveNumber].name : null;
+    // Prepare data for stacked bar chart
+    const stackedData = d3.stack() 
+      .keys(landCovers) // Define which categories to stack: the land covers
+      .value((d, key) => { 
+        const entry = data.find(e => e.landCover === key); // For each year, get the value for each land cover
+       return entry ? entry.values[d.index] : 0; // Return the data value or 0 if not found
+      })
+      (years.map((year, index) => {
+        const obj = { index, year }; // For each year, it creates a new object
+        landCovers.forEach((lc, i) => {
+          obj[lc] = data[i].values[index]; // For each land cover, adds a property to that object with the value for that land cover in that year
+        });
+        return obj;
+      }));
 
-  if (!clickedLandCover) return false;
+    // Create a band scale for the x-axis (categorical)
+    const x = d3.scaleBand() 
+      .domain(years) // Set the input domain to the list of years
+      .range([0, width]) // Map years to positions between 0 and chart width (pixels)
+      .padding(0.2); // Add space between the bars
+    // Draw x-axis using the x scale
+    let selectedYear = null; // Keep track of which year is selected (if any)
+    // Draw x-axis
+    const xaxis = svg.append('g')
+    .attr('class','x-axis')
+    .attr('transform', `translate(0, ${height})`) // Move x-axis group to the bottom of the chart
+    .call(d3.axisBottom(x).tickFormat(d3.format("d")).tickSizeOuter(0)) // Draw the axis on the bottom without the final outer tick
+    // Change when a year item is clicked
+    xaxis.selectAll('.x-axis text') // Select all year labels
+    .style('cursor', 'pointer') // Make the cursor a pointer to show it's clickable
+    .on('click', function(event, d) {
+      const clickedYear = d; // The year that was clicked
+      // If clicked item is already selected
+      if (selectedYear == clickedYear) {
+        selectedYear = null;
+        updateOpacity(xaxis.selectAll('.x-axis text'), selectedYear); // Reset opacity of the years
+        svg.selectAll('g.pie-chart').remove(); // Remove any existing pie chart
+        drawBars(stackedData, dominantClassByYear);
+      } 
+      // If clicked item is not already selected
+      else {
+        selectedYear = clickedYear;
+        const yearIndex = years.indexOf(clickedYear); // Get index of year in data
+        // Prepare pie data 1 for the selected year
+        const pieData1= data.map((d, i) => ({
+          landCover: d.landCover,
+          value: d.values[yearIndex],
+          color: colors[i]
+        }));
+        // Prepare pie data 1 for the selected year
+        const pieData2 = vulnerableGroupsByYear[selectedYear];
+        // Draws the pie charts
+        updateOpacity(xaxis.selectAll('.x-axis text'), clickedYear); // Lower the opacity of the non selected years
+        drawPieCharts(pieData1, pieData2, clickedYear); 
+    }});
 
-  if (currentFilter === clickedLandCover) {
-    // Goes back to main graph
-    currentFilter = null;
-    Plotly.react('no2-bar-chart', data, layout);
-  } else {
-    currentFilter = clickedLandCover;
-    const filteredData = data.filter(d => d.name === currentFilter);
-    Plotly.react('no2-bar-chart', filteredData, layout);
+    function Yaxis(Ydata) {
+      // Create a linear scale for the y-axis (numerical)
+      const maxVal = d3.max(Ydata[Ydata.length - 1], d => d[1]); // Determine max stacked bar height
+      const step = Math.ceil(d3.tickStep(0, maxVal, 14)/5)*5; // Calculate the step between each tick and round it upwards to the nearest multiple of 5
+      const roundedMax = Math.ceil(maxVal / step) * step; // Determine the value of the last tick
+      const y = d3.scaleLinear() 
+      .domain([0, roundedMax]) // Input domain: 0 to max stacked bar height
+      .nice(false) // Disable automatic rounding of scale domain
+      .range([height, 0]); // The smallest data value maps to pixel position `height` (bottom of the chart) and the largest data value maps to pixel position 0 (top of the chart)
+      // Draw y-axis using the y scale on the left side  
+      svg.append('g')
+      .attr('class', 'y-axis') // Add this class to enable updates later
+      .call(d3.axisLeft(y).tickSizeOuter(0)); // Draw the axis on the left without the final outer tick
+      return y;
+      }
+    
+    // Calculate the dominant exposure class for each year
+    const dominantClassByYear = years.map(year => {
+      const groupData = vulnerableGroupsByYear[year]; // Get data for the current year
+      const dominant = groupData.reduce((max, curr) => curr.value > max.value ? curr : max);  // Find the item with the highest value
+      return { year, color: dominant.color,label: dominant.label};
+    });
+
+    // Function to draw stacked bars histogram
+    function drawBars(dataToDraw, dominantClassByYear) {
+      
+      // Remove the previous histogram 
+      svg.selectAll('g.y-axis').remove();
+      svg.selectAll('g.bar-group').remove(); 
+      // Remove previous pie chart and reset opacity of the years
+      svg.selectAll('g.pie-chart').remove(); 
+      updateOpacity(d3.selectAll('g.x-axis text'), null);
+
+      // Draw the y-axis
+      const y = Yaxis(dataToDraw);
+
+      // Create a container group for the land cover bars
+      const groups = svg.append('g')
+      .attr('class', 'bar-group') 
+      .selectAll('g') // Select all child groups (none exist yet, but this prepares for data binding)
+      .data(dataToDraw) // Bind the data representing each land cover class
+      .join('g') // Creates a child group for each land cover class in the data
+      .attr('fill', (d, i) => { 
+          const idx = landCovers.indexOf(d.key); // Find the index of the land cover type
+          return colors[idx]; // Use that index to set the fill color for this group
+        });
+      groups.selectAll('rect') // For each group, look for all rectangles (bars)
+      .data(d => d) // Attach the specific data for each bar in this group
+      .join('rect') // Create a rectangle for each piece of data
+      .attr('x', d => x(d.data.year)) // Position the bar horizontally based on the year
+      .attr('y', d => y(d[1])) // Position the top of the bar vertically
+      .attr('width', x.bandwidth()) // Set the bar width to fit in the space for one year
+      .attr('height', d => y(d[0]) - y(d[1])) // Set the bar height based on data values
+
+      // Calculate the height of each column
+      const totalByYear = {};
+      dataToDraw.forEach(series => { // Loop through each data series
+        series.forEach(d => {
+          const year = d.data.year;
+          if (!totalByYear[year]) totalByYear[year] = 0;  // Initialize total for the year if not already defined
+          totalByYear[year] += d[1] - d[0]; // Add the bar height
+        });
+      });
+
+      // Max value label on top of  the bars
+      svg.selectAll('text.bar-label').remove(); // Remove old labels before adding new ones
+      groups.selectAll('text.bar-label') // Select bar labels within each stacked group
+      .data(d => d) // Attach the specific data for each bar in this group
+      .join('text') // Create a new <text> element for each data item
+      .attr('class', 'bar-label') // Assign a class for styling or future selection
+      .attr('x', d => x(d.data.year) + x.bandwidth() / 2) // Position text horizontally at center of each bar
+      .attr('y', d => y(d[1]) - 5) // Position text slightly above the top of each bar segment
+      .attr('text-anchor', 'middle') // Center-align the text
+      .attr('font-size', '12px')
+      .attr('font-weight', 'bold')
+      .attr('fill', '#000')
+      .text(d => (d[1] - d[0]).toFixed(1)); // Display the height of the bar segment
+
+      // Dot for the dominant exposure class on top 
+      svg.selectAll('circle.exposure-dot').remove(); // Remove old circles before adding new ones
+      groups.selectAll('circle.exposure-dot') // Select dots within each stacked group
+      .data(dominantClassByYear) // Attach the specific data for each bar in this group
+      .join('circle') // Create a new circle for each data item
+      .attr('class', 'exposure-dot') // Assign a class for styling or future selection
+      .attr('cx', d => x(d.year) + x.bandwidth() / 2) // Position text horizontally at center of each bar
+      .attr('cy', d => y(totalByYear[d.year]) - 30) // Position text above the top of each bar segment
+      .attr('r', 6) // Circle radius
+      .attr('fill', d => d.color) // Fill with the color of the dominant class
+      .attr('stroke', '#333') // Add border for visibility
+      .attr('stroke-width', 1);
+    }
+    drawBars(stackedData, dominantClassByYear); // Draw the bars with the data
+
+    // Draw interactive land cover legend
+    const legend1 = legend.append('div')  // Create a container for the legend on the side
+    let selectedLC = null; // Keep track of which land cover is selected (if any)
+    legend1.append('div')
+    .text('Land cover classes') // Legend titl
+    .attr('class', 'legend-title')
+    .style('font-weight', 'bold')
+    .style('font-size', '16px')
+    .style('margin-bottom', '10px');
+    legend1.selectAll('div.legend-item') // Create one legend item for each land cover type
+    .data(landCovers) // Bind land cover names to the legend items
+    .enter()
+    .append('div') // For each land cover that doesn't have a legend item yet, create a new box 
+    .attr('class', 'legend-item')
+    .style('display', 'flex') // Arrange color box and text in a row
+    .style('align-items', 'center') // Vertically center color box and text
+    .html((lc, i) => // Add colored boxes and labels
+      `<div class="legend1-color-box" style="width: 18px; height: 18px; background-color: ${colors[i]}; margin-right: 6px;"></div>
+      <span class="legend1-class">${lc}</span>`)
+    // Change when a legend item is clicked
+    .style('cursor', 'pointer') // Make the cursor a pointer to show it's clickable
+    .on('click', function (event, lc) {
+        // If clicked item is already selected
+        if (selectedLC === lc) {
+          selectedLC = null; // Deselect it
+          updateOpacity(legend1.selectAll('div'), selectedLC); // Reset opacity of the legend 
+          drawBars(stackedData, dominantClassByYear); // Show all bars again
+        } 
+        // If clicked item is not already selected
+        else { 
+          selectedLC = lc; // Select it
+          // Prepare data only for the selected land cover
+          const filteredData = data.filter(d => d.landCover === lc);
+          const filteredStack = d3.stack()
+          .keys([selectedLC])
+          .value((d, key) => {
+            const entry = data.find(e => e.landCover === key);
+            return entry ? entry.values[d.index] : 0;
+          })
+          (years.map((year, index) => {
+            const obj = { index, year };
+            obj[selectedLC] = data.find(d => d.landCover === selectedLC).values[index];
+            return obj;
+          }));
+          drawBars(filteredStack, dominantClassByYear); // Draw only selected bars
+        }
+        updateOpacity(legend1.selectAll('div'), selectedLC); // Lower the opacity of the non selected land covers
+        legend1.selectAll('.legend-title').style('opacity',1); // Make sure that the title stays opaque 
+      })
+    // Draw exposure class legend
+    const legend2 = legend.append('div')  // Create a container for the legend on the side
+    .style('min-width', '120px'); // Minimum width for the legend box
+    legend2.append('div')
+    .text('Exposure classes') // Legend title
+    .attr('class', 'legend-title')
+    .style('font-weight', 'bold')
+    .style('font-size', '16px')
+    .style('margin-bottom', '10px')
+    legend2.selectAll('div.legend-item')
+    .data(vulnerableGroupsByYear[2013]) // Bind land cover names to the legend items
+    .enter()
+    .append('div') // For each exposure class that doesn't have a legend item yet, create a new box 
+    .attr('class', 'legend-item')
+    .style('display', 'flex') // Arrange color box and text in a row
+    .style('align-items', 'center') // Vertically center color box and text
+    .html( d => // Add colored boxes and labels
+      `<div class="legend2-color-box" style="width: 18px; height: 18px; background-color: ${d.color}; margin-right: 6px;"></div>
+      <span class="legend2-class">${d.label}</span>`)
+    
+      // Function to change legend item opacity based on selection
+    function updateOpacity(selector, selected) {
+      // If the selected is null 
+      if (selected === null || !selected) {
+        selector.style('opacity', 1); // Restore the opacity of all
+      } 
+      // If the selected is not null 
+      else {
+        selector.style('opacity', function(d) { return d !== selected ? 0.3 : 1; }); // Lower the opacity of all the non selected
+        selector.filter(d => d === selected).selectAll('*').style('opacity', 1); // Assure that the selected and its children are fully opaque
+        }
+    }
+
+    // Function to draw pie charts
+    function drawPieCharts(pieData1, pieData2, clickedYear) {
+ 
+      // Remove the previous histogram and reset opacity of the legend
+      svg.selectAll('g.y-axis').remove();
+      svg.selectAll('g.bar-group').remove();  
+      updateOpacity(legend.selectAll('div'), null); 
+      // Remove previous pie chart 
+      svg.selectAll('g.pie-chart').remove();
+
+      // Functions to generate the pie slices 
+      const radius = Math.min(width/2, height) / 2 - 20; // Set radius
+      const pie = d3.pie() // Function to calculate the start and end angles for each slice 
+      .value(d => d.value); // Use 'value' property of the pieData to size 
+      const arc = d3.arc() // Function to draw the slices 
+      .innerRadius(0) // Set the slices starting point exactly at the center of the pie
+      .outerRadius(radius); // Set the slices ending point exactly at the end of the radius
+      
+      // Pie chart 1
+      const pieGroup1 = svg.append('g')
+      .attr('class', 'pie-chart') // Assign a class for styling or future selection
+      .attr('transform', `translate(${width/4}, ${height/2})`) // Center pie chart in the first half of the svg
+      const pieSlices1 = pieGroup1.selectAll('g.slice') 
+      .data(pie(pieData1)) // Convert pieData into slice geometry with 'pie' function
+      .enter()
+      .append('g')
+      .attr('class', 'slice');
+      pieSlices1.append('path') // For every item that doesn’t have a path yet, create a <path> element
+      .attr('d', arc) // Draw the slices with 'arc' function
+      .attr('fill', d => d.data.color); // Uses the original color from your pieData
+      // Add percentages
+      const total1 = d3.sum(pieData1, d => d.value); // Total of the data
+      pieSlices1.append('text')
+      .attr('transform', d => {
+        const [x, y] = arc.centroid(d); // Geometrical center of the slice
+        const offset = 1.4; // Offset from the center
+        return `translate(${x * offset}, ${y * offset})`;
+      })
+      .attr('text-anchor', 'middle')
+      .attr('font-size', '12px')
+      .attr('font-weight', 'bold')
+      .attr('fill', '#000')
+      .text(d => {
+        const percent = (d.data.value / total1) * 100; // Percentage calculation
+        return percent.toFixed(1) + '%';
+      });
+
+      // Pie chart 2
+      const pieGroup2 = svg.append('g')
+      .attr('class', 'pie-chart') // Assign a class for styling or future selection
+      .attr('transform', `translate(${3*width/4}, ${height/2})`) // Center pie chart in the second half of the svg
+      const pieSlices2 = pieGroup2.selectAll('g.slice') 
+      .data(pie(pieData2)) // Convert pieData into slice geometry with 'pie' function
+      .enter()
+      .append('g')
+      .attr('class', 'slice');
+      pieSlices2.append('path') // For every item that doesn’t have a path yet, create a <path> element
+      .attr('d', arc) // Draw the slices with 'arc' function
+      .attr('fill', d => d.data.color); // Uses the original color from your pieData
+      // Add percentages
+      const total2 = d3.sum(pieData2, d => d.value); // Total of the data
+      pieSlices2.append('text')
+      .attr('transform', d => {
+        const [x, y] = arc.centroid(d); // Geometrical center of the slice
+        const offset = 1.4; // Offset from the center
+        return `translate(${x * offset}, ${y * offset})`;
+      })
+      .attr('text-anchor', 'middle')
+      .attr('font-size', '12px')
+      .attr('font-weight', 'bold')
+      .attr('fill', '#000')
+      .text(d => {
+        const percent = (d.data.value / total2) * 100; // Percentage calculation
+        return percent.toFixed(1) + '%';
+      })
+    }
+
   }
 
-  return false; 
-});
-  </script>
+// Draw the histograms
+drawStackedChart('#no2-bar-chart', generatePollutantData(), vulnerableGroupsByYear);
+drawStackedChart('#pm2p5-bar-chart', generatePollutantData(), vulnerableGroupsByYear);
+drawStackedChart('#pm10-bar-chart', generatePollutantData(), vulnerableGroupsByYear);
+
+</script><!-- GN: histogram function -->
 
 </body>
+
 </html>
