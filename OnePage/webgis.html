@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Airware - WebGIS</title>
+  <title>AirAware - WebGIS</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -15,7 +15,9 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -27,7 +29,78 @@
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v10.5.0/ol.css">
-  <style>#map { width: 100%; height: 500px; }</style>
+  <style>
+    #map {
+      width: 100%;
+      height: 650px;
+      position: relative;
+    }
+
+    .ol-control.ol-full-screen button {
+      width: 28px;
+      height: 28px;
+      font-size: 16px;
+      border-radius: 2px;
+      background: #fff;
+      color: #333;
+      box-shadow: 0 1px 4px rgba(0, 60, 136, .2);
+      padding: 0;
+      line-height: 1;
+      display: inline-block;
+      transition: background 0.2s;
+      border: none;
+    }
+
+    .ol-control.ol-full-screen button:hover {
+      background: #e6e6e6;
+    }
+
+    .ol-control.ol-recenter {
+      background: none;
+      box-shadow: none;
+      padding: 0;
+    }
+
+    .ol-control.ol-recenter button {
+      background: #fff;
+      color: #333;
+      border: none;
+      border-radius: 2px;
+      width: 28px;
+      /* Match OpenLayers fullscreen button */
+      height: 28px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 1px 4px rgba(0, 60, 136, .2);
+      padding: 0;
+      line-height: 1;
+      /* Remove flex properties */
+      display: inline-block;
+      align-items: unset;
+      justify-content: unset;
+      transition: background 0.2s;
+    }
+
+    .ol-control.ol-recenter button:hover {
+      background: #e6e6e6;
+    }
+
+    #map-controls {
+      position: absolute;
+      top: 0.5em;
+      right: 0.5em;
+      display: flex;
+      gap: 0.5em;
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    #map-controls .ol-control {
+      pointer-events: auto;
+      margin: 0;
+      position: static;
+    }
+  </style>
 </head>
 
 <body class="webgis-page">
@@ -37,7 +110,7 @@
 
       <a href="index.html" class="logo d-flex align-items-center me-auto">
         <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1 class="sitename">Airware</h1>
+        <h1 class="sitename">AirAware</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
@@ -71,9 +144,13 @@
     <!-- WebGIS Section -->
     <section id="webgis" class="service-details section">
       <div class="container">
-        <p>Use the interactive map below to explore air quality data. Pan and zoom the map to navigate, and click on markers or regions for more information. The map displays air quality measurements (such as pollutant concentrations or AQI) with color-coded markers and layers to indicate pollution levels.</p>
+        <p>Use the interactive map below to explore air quality data. Pan and zoom the map to navigate, and click on
+          markers or regions for more information. The map displays air quality measurements (such as pollutant
+          concentrations or AQI) with color-coded markers and layers to indicate pollution levels.</p>
       </div>
-      <div id="map"></div>
+      <div id="map">
+        <div id="map-controls"></div>
+      </div>
     </section><!-- /WebGIS Section -->
   </main>
 
@@ -83,9 +160,9 @@
       <div class="row gy-4">
         <div class="col-lg-5 col-md-12 footer-about">
           <a href="index.html" class="logo d-flex align-items-center">
-            <span class="sitename">Airware</span>
+            <span class="sitename">AirAware</span>
           </a>
-          <p>Airware is committed to providing accessible air quality information for everyone.</p>
+          <p>AirAware is committed to providing accessible air quality information for everyone.</p>
           <div class="social-links d-flex mt-4">
             <a href="#"><i class="bi bi-twitter"></i></a>
             <a href="#"><i class="bi bi-facebook"></i></a>
@@ -110,24 +187,22 @@
           <ul>
             <li><a href="#">PM2.5</a></li>
             <li><a href="#">PM10</a></li>
-            <li><a href="#">Ozone (O3)</a></li>
-            <li><a href="#">Nitrogen Dioxide (NO2)</a></li>
-            <li><a href="#">+ More</a></li>
+            <li><a href="#">Nitrogen Dioxide (NO<sub>2</sub>)</a></li>
           </ul>
         </div>
 
         <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
           <h4>Contact Us</h4>
-          <p>Airware Labs<br>123 Clean Air St.<br>City, Country</p>
+          <p>AirAware Labs<br>123 Clean Air St.<br>City, Country</p>
           <p class="mt-4"><strong>Phone:</strong> <span>+1 (234) 567-890</span></p>
-          <p><strong>Email:</strong> <span>contact@airware.org</span></p>
+          <p><strong>Email:</strong> <span>contact@airaware.org</span></p>
         </div>
 
       </div>
     </div>
 
     <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">Airware</strong> <span>All Rights Reserved</span></p>
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">AirAware</strong> <span>All Rights Reserved</span></p>
       <div class="credits">
         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
@@ -136,7 +211,8 @@
   </footer>
 
   <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <!-- Preloader -->
   <div id="preloader"></div>
@@ -163,12 +239,48 @@
       ],
       view: new ol.View({
         center: ol.proj.fromLonLat(initialCoordinates),
-        zoom: initialZoom})
-      });
+        zoom: initialZoom
+      })
+    });
+
+    // Add scale line, full screen, and mouse position controls
+    class RecenterControl extends ol.control.Control {
+      constructor(opt_options) {
+        const options = opt_options || {};
+        const button = document.createElement('button');
+        button.innerHTML = '<i class="bi bi-crosshair"></i>';
+        button.title = 'Recenter map';
+
+        const element = document.createElement('div');
+        element.className = 'ol-control ol-recenter ol-unselectable ol-control';
+        element.appendChild(button);
+
+        super({
+          element: element,
+          target: 'map-controls'
+        });
+
+        button.addEventListener('click', () => {
+          map.getView().setCenter(ol.proj.fromLonLat(initialCoordinates));
+          map.getView().setZoom(initialZoom);
+        }, false);
+      }
+    }
+    map.addControl(new RecenterControl({ target: 'map-controls' }));
+    map.addControl(new ol.control.FullScreen({ target: 'map-controls' }));
+    map.addControl(new ol.control.ScaleLine());
+    map.addControl(new ol.control.MousePosition({
+      coordinateFormat: ol.coordinate.createStringXY(4),
+      projection: 'EPSG:4326',
+      className: 'custom-control',
+      placeholder: '0.0000, 0.0000'
+    })
+    );
   </script>
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
 
 </body>
+
 </html>
