@@ -9,8 +9,8 @@
   <meta name="keywords" content="">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="assets/img/AA.png" rel="icon">
+  <link href="assets/img/AirAware.png" rel="apple-touch-icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -113,7 +113,7 @@
       max-width: none !important;
       width: auto !important;
       pointer-events: none;
-      z-index: 1000;
+      z-index: 10;
     }
 
     #map-controls {
@@ -122,7 +122,7 @@
       right: 0.5em;
       display: flex;
       gap: 0.5em;
-      z-index: 1000;
+      z-index: 10;
       pointer-events: none;
     }
 
@@ -142,7 +142,7 @@
       border-radius: 8px;
       box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
       font-size: 14px;
-      z-index: 1001;
+      z-index: 10;
       width: fit-content;
       max-width: 200px;
     }
@@ -223,91 +223,72 @@
   <footer id="footer" class="footer light-background">
 
     <div class="container footer-top">
-      <div class="row gy-4">
-        <div class="col-lg-5 col-md-12 footer-about">
-          <a href="index.html" class="logo d-flex align-items-center">
-            <span class="sitename">AirAware</span>
-          </a>
-          <p>AirAware is committed to providing accessible air quality information for everyone.</p>
-          <div class="social-links d-flex mt-4">
-            <a href="#"><i class="bi bi-twitter"></i></a>
-            <a href="#"><i class="bi bi-facebook"></i></a>
-            <a href="#"><i class="bi bi-instagram"></i></a>
-            <a href="#"><i class="bi bi-linkedin"></i></a>
+
+      <div class="row gy-3">
+
+        <div class="col-lg-2 col-md-12 footer-about">
+          <div style="width:150px; height:150px; overflow:hidden;">
+            <img src="assets/img/AirAware.png" alt="" style="width:100%; height:100%; object-fit: contain;">
           </div>
         </div>
 
-        <div class="col-lg-2 col-6 footer-links">
-          <h4>Useful Links</h4>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="results.html">Results</a></li>
-            <li><a href="webgis.html">WebGIS</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-          </ul>
+        <div class="col-lg-4 col-md-12 footer-about">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span class="sitename">AirAware</span>
+          </a>
+          <p><strong>Air matters. Data speaks. Maps reveal.</strong><br>
+            A collaborative GIS project on air pollution in Hungary by three students from the MSc Geoinformatics
+            Engineering program at Politecnico di Milano.</p>
         </div>
 
         <div class="col-lg-2 col-6 footer-links">
           <h4>Pollutants</h4>
           <ul>
-            <li><a href="#">PM2.5</a></li>
-            <li><a href="#">PM10</a></li>
-            <li><a href="#">Nitrogen Dioxide (NO<sub>2</sub>)</a></li>
+            <li><a href="index.html#pollutants-info">Overview</a></li>
+            <li><a href="results.html#pm2p5-title">PM<sub>2.5</sub></a></li>
+            <li><a href="results.html#pm10-title">PM<sub>10</sub></a></li>
+            <li><a href="results.html#no2-title">NO<sub>2</sub></a></li>
           </ul>
         </div>
 
-        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+        <div class="col-lg-4 col-md-12 footer-contact text-center text-md-start">
           <h4>Contact Us</h4>
-          <p>AirAware Labs<br>123 Clean Air St.<br>City, Country</p>
-          <p class="mt-4"><strong>Phone:</strong> <span>+1 (234) 567-890</span></p>
-          <p><strong>Email:</strong> <span>contact@airaware.org</span></p>
-        </div>
+          <div class="contact-person">
+            <strong>Davide Galluzzo</strong> -
+            <a href="mailto:davide.galluzzo@mail.polimi.it">davide.galluzzo@mail.polimi.it</a>
+            <a href="https://github.com/galluzzodavide" target="_blank" rel="noopener noreferrer" class="ms-2">
+              <i class="bi bi-github"></i>
+            </a>
+          </div>
 
+          <div class="contact-person">
+            <strong>Giada Nespoli</strong> -
+            <a href="mailto:giada.nespoli@mail.polimi.it">giada.nespoli@mail.polimi.it</a>
+            <a href="https://github.com/giadanespoli" target="_blank" rel="noopener noreferrer" class="ms-2">
+              <i class="bi bi-github"></i>
+            </a>
+          </div>
+
+          <div class="contact-person">
+            <strong>Luciana Bertucci</strong> -
+            <a href="mailto:luciana.bertucci@mail.polimi.it">luciana.bertucci@mail.polimi.it</a>
+            <a href="https://github.com/lucibertucci" target="_blank" rel="noopener noreferrer" class="ms-2">
+              <i class="bi bi-github"></i>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">AirAware</strong> <span>All Rights Reserved</span></p>
+      <p>©️ <span>Copyright</span> <strong class="px-1 sitename">AirAware</strong> <span>All Rights Reserved</span></p>
       <div class="credits">
         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
-    </div>
-
   </footer>
 
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Preloader -->
-  <div id="preloader"></div>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/ol@v10.5.0/dist/ol.js"></script>
   <script>
-    const initialZoom = 7;
-    const initialCoordinates = [19.503, 47.165];
-    var map = new ol.Map({
-      target: 'map',
-      layers: [
-        new ol.layer.Tile({
-          source: new ol.source.OSM()
-        })
-      ],
-      view: new ol.View({
-        center: ol.proj.fromLonLat(initialCoordinates),
-        zoom: initialZoom
-      })
-    });
 
     // Add scale line, full screen, and mouse position controls
     class RecenterControl extends ol.control.Control {
@@ -332,6 +313,22 @@
         }, false);
       }
     }
+    const initialCoordinates = [19.0402, 47.4979]; // Budapest as an example
+    const initialZoom = 7;
+
+    const map = new ol.Map({
+      target: 'map',
+      layers: [
+        new ol.layer.Tile({
+          source: new ol.source.OSM()
+        })
+      ],
+      view: new ol.View({
+        center: ol.proj.fromLonLat(initialCoordinates),
+        zoom: initialZoom
+      })
+    });
+
     map.addControl(new RecenterControl({ target: 'map-controls' }));
     map.addControl(new ol.control.FullScreen({ target: 'map-controls' }));
     map.addControl(new ol.control.ScaleLine());
@@ -388,7 +385,7 @@
     });
 
     const toggleMain = document.getElementById('toggle-country-layer');
-    const toggleLegend = document.getElementById('toggle-country-layer-legend');
+    // const toggleLegend = document.getElementById('toggle-country-layer-legend');
 
     [toggleMain, toggleLegend].forEach(toggle => {
       toggle.addEventListener('change', function () {
@@ -400,22 +397,7 @@
         }
       });
     });
-    window.addEventListener('scroll', () => {
-      const map = document.getElementById('map');
-      const controls = document.getElementById('map-controls');
-      const legend = document.getElementById('map-legend');
 
-      if (!map || !controls || !legend) return;
-
-      const rect = map.getBoundingClientRect();
-      const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-
-      controls.style.display = isVisible ? 'flex' : 'none';
-      legend.style.display = isVisible ? 'block' : 'none';
-    });
-
-    // Trigger scroll handler once on page load to set initial visibility
-    window.dispatchEvent(new Event('scroll'));
   </script>
 
   <!-- Main JS File -->
