@@ -86,12 +86,7 @@ a:hover {
   text-decoration: none;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1,h2,h3,h4,h5,h6 {
   color: var(--heading-color);
   font-family: var(--heading-font);
 }
@@ -236,7 +231,7 @@ h6 {
   padding: 20px 0;
   transition: all 0.5s;
   z-index: 997;
-  border-bottom: 1px solid color-mix(in srgb, var(--accent-color), transparent 85%);
+  border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
 }
 
 .header .logo {
@@ -534,16 +529,35 @@ h6 {
 # Global Footer
 --------------------------------------------------------------*/
 .footer {
+  border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
   color: var(--default-color);
-  background-color: var(--background-color);
-  border-top: 1px solid color-mix(in srgb, var(--accent-color), transparent 80%);
   font-size: 14px;
   padding-bottom: 50px;
   position: relative;
+  overflow: hidden;
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('../img/AirAware-background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.3;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.footer > * {
+  position: relative;
+  z-index: 1; 
 }
 
 .footer .footer-top {
   padding-top: 50px;
+  z-index: 1;
 }
 
 .footer .footer-about .logo {
@@ -736,12 +750,29 @@ h6 {
 /*--------------------------------------------------------------
 # Global Page Titles & Breadcrumbs
 --------------------------------------------------------------*/
-.page-title {
-  color: var(--default-color);
-  background-color: var(--background-color);
+
+.page-title { 
   padding: 120px 0;
+  color: var(--default-color);
   text-align: center;
+  position: relative; /* sets positioning context for absolute children */
+  overflow: hidden; /* hides content overflowing the container */
+}
+
+.page-title .bg-image {
+  position: absolute; /* positions the background relative to parent */
+  inset: 0; /* top, right, bottom, left set to 0 to cover entire area */
+  background-image: url('../img/AirAware-background.png');
+  background-size: cover; /* scales image to cover the container while keeping aspect ratio */
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.3;
+  z-index: 0; /* places the image behind other content */
+}
+
+.page-title .content {
   position: relative;
+  z-index: 1; /* places content above the background image */
 }
 
 .page-title h1 {
@@ -759,6 +790,7 @@ h6 {
   margin: 0;
   font-size: 16px;
   font-weight: 400;
+  color: #2487ce;
 }
 
 .page-title .breadcrumbs ol a {
@@ -915,7 +947,9 @@ section,
 }
 
 .hero .icon-box .title a {
-  color: var(--heading-color);
+  pointer-events: none; 
+  cursor: default;
+  color: #444444;
   transition: 0.3s;
 }
 
@@ -2038,12 +2072,6 @@ section,
   color: var(--accent-color);
 }
 
-/*--------------------------------------------------------------
-# Starter Section Section
---------------------------------------------------------------*/
-.starter-section {
-  /* Add your styles here */
-}
 
 /* GN: styles */
 
@@ -2073,4 +2101,12 @@ section,
 }
 .footer-contact a[href^="mailto:"]:hover {
   text-decoration: underline;
+}
+
+#WHO-preview:hover {
+  opacity: 0;
+}
+
+#CAMS-preview:hover {
+  opacity: 0;
 }

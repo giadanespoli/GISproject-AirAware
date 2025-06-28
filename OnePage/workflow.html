@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>AirAware - Results</title>
+  <title>AirAware - Workflow</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -27,43 +27,46 @@
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
 
-  <!-- GN: load the D3.js library -->
-  <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 
-<body>
+<body class="workflow-page">
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="header">
-    <div class="container d-flex align-items-center justify-content-between">
-      <h1 class="logo"><a href="index.html">AirAware</a></h1>
-      <nav id="navmenu" class="navmenu d-flex">
-        <ul class="list-unstyled d-flex m-0">
-          <li><a class="nav-link scrollto" href="index.html">Home</a></li>
-          <li><a class="nav-link scrollto" href="workflow.html">Workflow</a></li>
-          <li><a class="nav-link scrollto" href="results.html">Results</a></li>
-          <!-- Add other nav items here as needed -->
+  <header id="header" class="header d-flex align-items-center sticky-top">
+
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+      <a href="workflow.html" class="logo d-flex align-items-center me-auto">
+        <h1 class="sitename">AirAware</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="workflow.html" class="active">Workflow</a></li>
+          <li><a href="results.html">Results</a></li>
+          <li><a href="webgis.html">WebGIS</a></li>
         </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
+
     </div>
-  </header><!-- End Header -->
+  </header>
 
-  <main id="main">
+  <main class="main">
 
-    <!-- ======= Page Title Section ======= -->
-    <section class="page-title">
-      <div class="container">
-        <h2>Workflow</h2>
-        <p class="text-center">Tools and Implementation Details</p>
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb justify-content-center mb-0">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Workflow</li>
+    <!-- Page Title -->
+    <div class="page-title">
+      <div class="bg-image"></div>
+      <div class="content">
+        <h1>Workflow</h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li class="current">Workflow</li>
           </ol>
         </nav>
       </div>
-    </section>
+    </div><!-- End Page Title -->
 
     <!-- ======= Technical Aspects Section ======= -->
     <section id="technical-aspects" class="section">
@@ -89,8 +92,8 @@
       </div>
     </section>
 
-    <!-- ======= Implementations Section ======= -->
-    <section id="implementation" class="section light-background">
+    <!-- GN: Implementations Section -->
+    <section id="implementation" class="section">
       <div class="container">
         <div class="section-title">
           <h2>Website Implementation</h2>
@@ -118,7 +121,7 @@
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-<footer id="footer" class="footer light-background">
+  <footer id="footer" class="footer light-background">
 
     <div class="container footer-top">
 
@@ -131,28 +134,28 @@
         </div>
 
         <div class="col-lg-4 col-md-12 footer-about">
-          <a href="index.html" class="logo d-flex align-items-center">
+          <a href="home.html" class="logo d-flex align-items-center">
             <span class="sitename">AirAware</span>
           </a>
           <p><strong>Air matters. Data speaks. Maps reveal.</strong><br>
-          A collaborative GIS project on air pollution in Hungary by three students from the MSc Geoinformatics Engineering program at Politecnico di Milano.</p>
+            A collaborative GIS project on air pollution in Hungary by three students from the MSc Geoinformatics
+            Engineering program at Politecnico di Milano.</p>
         </div>
 
         <div class="col-lg-2 col-6 footer-links">
           <h4>Pollutants</h4>
           <ul>
-            <li><a href="index.html#pollutants-info">Overview</a></li>
-            <li><a href="results.html#pm2p5-title">PM<sub>2.5</sub></a></li> 
+            <li><a href="home.html#pollutants-info">Overview</a></li>
+            <li><a href="results.html#pm2p5-title">PM<sub>2.5</sub></a></li>
             <li><a href="results.html#pm10-title">PM<sub>10</sub></a></li>
-            <li><a href="results.html#no2-title">Nitrogen Dioxide (NO2)</a></li>
+            <li><a href="results.html#no2-title">NO<sub>2</sub></a></li>
           </ul>
         </div>
 
         <div class="col-lg-4 col-md-12 footer-contact text-center text-md-start">
           <h4>Contact Us</h4>
-
           <div class="contact-person">
-            <strong>Davide Galluzzo</strong> - 
+            <strong>Davide Galluzzo</strong> -
             <a href="mailto:davide.galluzzo@mail.polimi.it">davide.galluzzo@mail.polimi.it</a>
             <a href="https://github.com/galluzzodavide" target="_blank" rel="noopener noreferrer" class="ms-2">
               <i class="bi bi-github"></i>
@@ -160,7 +163,7 @@
           </div>
 
           <div class="contact-person">
-            <strong>Giada Nespoli</strong> - 
+            <strong>Giada Nespoli</strong> -
             <a href="mailto:giada.nespoli@mail.polimi.it">giada.nespoli@mail.polimi.it</a>
             <a href="https://github.com/giadanespoli" target="_blank" rel="noopener noreferrer" class="ms-2">
               <i class="bi bi-github"></i>
@@ -168,25 +171,21 @@
           </div>
 
           <div class="contact-person">
-            <strong>Luciana Bertucci</strong> - 
+            <strong>Luciana Bertucci</strong> -
             <a href="mailto:luciana.bertucci@mail.polimi.it">luciana.bertucci@mail.polimi.it</a>
             <a href="https://github.com/lucibertucci" target="_blank" rel="noopener noreferrer" class="ms-2">
               <i class="bi bi-github"></i>
             </a>
           </div>
-
         </div>
-
       </div>
     </div>
 
     <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">AirAware</strong> <span>All Rights Reserved</span></p>
+      <p>©️ <span>Copyright</span> <strong class="px-1 sitename">AirAware</strong> <span>All Rights Reserved</span></p>
       <div class="credits">
         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
-    </div>
-
   </footer>
 
   <!-- JavaScript Libraries -->
@@ -197,19 +196,25 @@
   <!-- Include Chart.js or other chart library -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
 
-  <!-- Template Main JS File -->
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div> 
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
+  <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
-  <script>
-    // Initialize AOS for scroll animations
-    AOS.init({
-      duration: 600,
-      easing: 'ease-in-out',
-      once: true,
-      mirror: false
-    });
-    // Initialize GLightbox (if used)
-    const glightbox = GLightbox({ selector: '.glightbox' });
-    // Initialize any charts or map here if needed
-  </script>
+
 </body>
+
 </html>
