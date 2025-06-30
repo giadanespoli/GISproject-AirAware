@@ -85,7 +85,89 @@
             </p>
           </div>
         </div>
-      </div>
+        <div class="row mt-4">
+          <div class="col-lg-12">
+            <h4 class="mb-3">CAMS NetCDF Monthly Aggregated Pollutants</h4>
+              <p>
+                For this project, we used validated ensemble reanalysis data from 
+                <a href="https://ads.atmosphere.copernicus.eu/" target="_blank" rel="noopener noreferrer">
+                CAMS</a> to obtain NO<sub>2</sub>, PM2.5, and PM10 concentrations for 
+                <strong>December 2022</strong>. After downloading the NetCDF and GeoTIFF files with 
+                the required parameters, we loaded them into QGIS, assigned the 
+                <strong>EPSG:4326</strong> projection, and explored the time bands provided. 
+                To focus on our case study area, we clipped the monthly aggregated rasters 
+                using a mask layer, automating the process with the <em>Run as Batch Process</em> 
+                tool and <strong>Autofill</strong> settings. The outputs were saved using a standardized 
+                naming format (e.g., <code>Italy_CAMS_no2_2022_12.tif</code>), ready for 
+                analysis and visualization.
+              </p>
+              <div class="text-center mt-3">
+                <img src="assets/img/netcdf.png" alt="CAMS Monthly Aggregated Map" class="img-fluid rounded", width="500">
+                <p class="small mt-2 text-muted">Example of monthly aggregated CAMS pollutant map loaded in QGIS</p>
+              </div>
+            </div>
+          </div>
+        <div class="row mt-4">
+          <div class="col-lg-12">
+            <h4 class="mb-3">CAMS NetCDF Yearly Aggregated Pollutants</h4>
+              <p>
+                After preparing the monthly clipped maps, we performed a yearly aggregation 
+                to compute average pollutant concentrations (NO<sub>2</sub>, PM2.5, PM10) for 2022. 
+                Using the <em>Processing Toolbox → r.series</em> tool in QGIS, we selected all 
+                monthly raster layers for the year and set the aggregation operation to 
+                <strong>average</strong>. This process was automated with the <em>Run as Batch Process</em> 
+                option, enabling us to generate yearly averages efficiently. 
+                The resulting rasters were saved following a consistent naming convention 
+                (e.g., <code>Italy_average_no2_2022.tif</code>), ensuring they were ready 
+                for final analysis and delivery.
+              </p>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-lg-12">
+            <h4 class="mb-3">Yearly Concentration Map</h4>
+              <p>
+                To generate yearly concentration classification maps, we reclassified the 
+                yearly average rasters into five classes based on EU guideline thresholds 
+                for NO<sub>2</sub>, PM2.5, and PM10. This was done using the 
+                <em>Processing Toolbox → Raster analysis → Reclassify by table</em> tool in QGIS, 
+                filling the table with class breaks corresponding to pollutant concentration levels. 
+                We automated the workflow through the <em>Run as Batch Process</em> feature to apply 
+                it across all pollutants efficiently. The final outputs were named following a 
+                clear format, such as <code>Italy_no2_concentration_map_2020.tif</code>, 
+                ready for reporting and comparison against EU air quality standards.
+              </p>
+              <div class="text-center mt-3">
+                <img src="assets/img/EUlimit.jpg" alt="Health guidelines" class="img-fluid rounded", width="600">
+                <p class="small mt-2 text-muted">EU classification levels for NO₂, PM2.5, and PM10 based on annual average concentrations</p>
+              </div>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-lg-12">
+            <h4 class="mb-3">Annual Average Difference from 5-year Mean</h4>
+              <p>
+                To analyze short-term trends and deviations from historical air quality, we calculated the 
+                difference between the annual average pollutant concentrations for 2022 and the mean of 
+                the previous five years (2017–2021) for NO<sub>2</sub>, PM2.5, and PM10. Using the 
+                <em>Raster Calculator</em> in QGIS, we applied the expression 
+                <code>POLLUTANT_2022 - AVERAGE(2017-2021)</code> to generate these difference maps.
+                This highlights areas with higher or lower pollution relative to recent norms, 
+                supporting the identification of anomalies or impacts from events such as lockdowns 
+                or changes in traffic patterns.
+              </p>
+              <p>
+                We then applied discrete symbology to classify the results into meaningful intervals 
+                for each pollutant, enabling clear visual interpretation of where concentrations 
+                increased or decreased. Positive values indicated higher pollution than the 5-year 
+                mean, while negative values revealed improvements or temporary reductions.
+              </p>
+              <div class="text-center mt-3">
+                <img src="assets/img/AnnualAverage.JPG" alt="Annual Average" class="img-fluid rounded", width="900">
+                <p class="small mt-2 text-muted">Classification of annual differences from the 5-year mean for NO₂, PM2.5, and PM10, showing increases (positive) or decreases (negative) in µg/m³</p>
+              </div>
+          </div>
+        </div>
     </section>
 
     <!-- GN: Implementations Section -->
