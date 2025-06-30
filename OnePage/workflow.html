@@ -168,6 +168,48 @@
               </div>
           </div>
         </div>
+        <div class="row mt-4">
+          <div class="col-lg-12">
+            <h4 class="mb-3">Reclassified ESA CCI Land Cover</h4>
+              <p>
+                To produce simplified land cover maps, we processed the ESA CCI LC 2022 dataset in QGIS, selecting the <code>lccs_class</code> 
+                layer and reprojecting it to <strong>EPSG:4326</strong>. Using the <em>Reclassify by table</em> tool, we grouped the original 
+                22 land cover classes into broader IPCC categories like Agriculture, Forest, Grassland, Wetland, Settlement, and Other, following 
+                the provided schema. We automated this with <em>Run as Batch Process</em> for multiple years when needed.
+              </p>
+              <p>
+                This approach allowed us to generate clear thematic maps (e.g., <code>Italy_LC_reclassified_2022.tif</code>), making it easier 
+                to compare land use patterns and support further environmental analysis.
+              </p>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-lg-12">
+            <h4 class="mb-3">ESA CCI LC 2022 – Resampling</h4>
+              <p>
+                To harmonize spatial resolution, we resampled the CAMS pollutant maps (~1 km) to match the finer ESA CCI LC 2022 land cover dataset (~300 m per pixel). This was done in QGIS using the <em>Raster → Projections → Warp (reproject)</em> tool, setting the target resolution and using nearest neighbor interpolation to preserve categorical data integrity.
+              </p>
+              <p>
+                This step ensured both datasets aligned spatially for overlay and joint analysis, allowing for consistent environmental assessments across the study area.
+              </p>
+          </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-lg-12">
+          <h4 class="mb-3">ESA CCI LC 2022 – CAMP POLLUTANT 2013-2022 Statistics</h4>
+            <p>
+              To analyze pollutant trends by land cover, we computed zonal statistics over the built-up areas (settlements) 
+              using the ESA CCI LC 2022 data and average annual CAMS pollutant layers from 2013 to 2022. 
+              The workflow in QGIS involved converting the land cover raster to vector, isolating urban areas, 
+              dissolving them, and applying the <em>Processing Toolbox → Zonal Statistics</em> tool to extract mean 
+              and maximum values for each year.
+            </p>
+            <p>
+              The resulting statistics were consolidated into a single vector file, enabling time-series plots 
+              that show how NO<sub>2</sub>, PM2.5, and PM10 evolved over the last decade in urban environments.
+            </p>
+        </div>
+      </div>
     </section>
 
     <!-- GN: Implementations Section -->
