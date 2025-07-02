@@ -210,7 +210,54 @@
             </p>
         </div>
       </div>
-    </section>
+      <div class="row mt-4">
+        <div class="col-lg-12">
+          <h4 class="mb-3">Air quality and population – combined visualization with bivariate map</h4>
+            <p>
+              To explore the spatial relationship between air quality and population distribution in Hungary, we combined
+              the classified pollutant concentration map (NO<sub>2</sub> 2020) with the population exposure data.
+              Using QGIS, we first reclassified the population raster into 5 quantile-based classes to ensure equal distribution 
+              of pixels among the classes. Then we computed zonal statistics on the administrative GAUL Level 2 units to obtain 
+              the median population class and the maximum pollutant class for each zone.
+            </p>
+            <p>
+              We created a new <em>bivariate</em> attribute by combining these two indicators, allowing us to visualize areas with
+              concurrent high pollution levels and high population densities on a single map. Finally, we applied a 5x5 bivariate color style
+              to effectively communicate the overlap of these two factors across Hungary’s provinces.
+              This approach allowed us to create clear thematic maps (e.g., <code>Hungary_no2_2020_bivariate.gpkg</code>), 
+              facilitating the comparison of air pollution and population distribution patterns and supporting further spatial analysis.
+            </p>
+            <div class="text-center mt-3">
+              <img src="assets/img/AnnualAverage.JPG" alt="Annual Average" class="img-fluid rounded", width="900">
+              <p class="small mt-2 text-muted">Classification of annual differences from the 5-year mean for NO₂, PM2.5, and PM10, showing increases (positive) or decreases (negative) in µg/m³</p>
+            </div>
+        </div>
+      <div class="row mt-4">
+        <div class="col-lg-12">
+          <h4 class="mb-3">Air quality and Population exposure</h4>
+            <p>
+              To explore how air pollution interacts with population distribution in Hungary, we first classified the 
+              population count raster into five quantile-based classes and combined it with the pollutant concentration 
+              map for NO<sub>2</sub> (2020). Using zonal statistics over GAUL Level 2 administrative boundaries, 
+              we derived the median population class and the maximum pollutant class for each zone, creating a bivariate 
+              indicator to highlight areas with simultaneous high exposure. We visualized this with a 5×5 bivariate color 
+              scheme, making spatial patterns of joint high pollution and dense population easily identifiable.
+            </p>
+            <p>
+              To further summarize this exposure, we dissolved the bivariate layer by pollutant class to aggregate 
+              the data into a maximum of five features and recalculated zonal statistics to obtain the total 
+              population count per pollutant class. This enabled the creation of a clear pie chart illustrating 
+              the distribution of Hungary’s population across different air quality classes. The final outputs include 
+              both the bivariate map (<code>Hungary_no2_2020_bivariate.gpkg</code>) and the dissolved summary 
+              layer (<code>Hungary_no2_2020_chart.gpkg</code>) ready for integration into our website.
+            </p>
+            <div class="text-center mt-3">
+              <img src="assets/img/AnnualAverage.JPG" alt="Annual Average" class="img-fluid rounded", width="900">
+              <p class="small mt-2 text-muted">Classification of annual differences from the 5-year mean for NO₂, PM2.5, and PM10, showing increases (positive) or decreases (negative) in µg/m³</p>
+            </div>
+        </div>
+      </div>
+</section>
 
     <!-- GN: Implementations Section -->
     <section id="implementation" class="section">
