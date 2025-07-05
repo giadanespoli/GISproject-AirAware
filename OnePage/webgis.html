@@ -168,11 +168,7 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-<<<<<<< HEAD
-          <li><a href="index.html">Home</a></li>
-=======
           <li><a href="home.html">Home</a></li>
->>>>>>> gn
           <li><a href="workflow.html">Workflow</a></li>
           <li><a href="results.html">Results</a></li>
           <li><a href="webgis.html" class="active">WebGIS</a></li>
@@ -238,11 +234,7 @@
         </div>
 
         <div class="col-lg-4 col-md-12 footer-about">
-<<<<<<< HEAD
-          <a href="index.html" class="logo d-flex align-items-center">
-=======
           <a href="home.html" class="logo d-flex align-items-center">
->>>>>>> gn
             <span class="sitename">AirAware</span>
           </a>
           <p><strong>Air matters. Data speaks. Maps reveal.</strong><br>
@@ -253,11 +245,7 @@
         <div class="col-lg-2 col-6 footer-links">
           <h4>Pollutants</h4>
           <ul>
-<<<<<<< HEAD
-            <li><a href="index.html#pollutants-info">Overview</a></li>
-=======
             <li><a href="home.html#pollutants-info">Overview</a></li>
->>>>>>> gn
             <li><a href="results.html#pm2p5-title">PM<sub>2.5</sub></a></li>
             <li><a href="results.html#pm10-title">PM<sub>10</sub></a></li>
             <li><a href="results.html#no2-title">NO<sub>2</sub></a></li>
@@ -353,6 +341,17 @@
       target: document.getElementById('mouse-coords-container')
     }));
 
+
+    const wmsLayer = new ol.layer.Image({
+      opacity: 0.6,
+      source: new ol.source.ImageWMS({
+        url: 'file:12/Hungary_average_no2_2022.tif, 
+        params: { 'LAYERS': 'gisgeoserver_12:Hungary_no2_concentration_map_2020', 'TILED': true },
+        ratio: 1,
+        serverType: 'geoserver'
+      })
+    });
+    map.addLayer(wmsLayer);
 
     let countryLayer;
 
