@@ -477,6 +477,25 @@
         opacityNo2Value.textContent = Math.round(this.value * 100) + '%';
       }
     });
+
+    // Toggle e Opacità per HungaryAADmap2022
+    const toggleAAD = document.getElementById('toggle-aad-layer');
+    const opacityAAD = document.getElementById('opacity-aad');
+    const opacityAADValue = document.getElementById('opacity-aad-value');
+
+    toggleAAD.addEventListener('change', function () {
+      if (HungaryAADmap2022) {
+        HungaryAADmap2022.setVisible(this.checked);
+  }
+});
+
+opacityAAD.addEventListener('input', function () {
+  if (HungaryAADmap2022) {
+    HungaryAADmap2022.setOpacity(parseFloat(opacityAAD.value));
+    opacityAADValue.textContent = Math.round(this.value * 100) + '%';
+  }
+});
+
   });
 
   </script>
