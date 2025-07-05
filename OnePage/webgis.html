@@ -29,6 +29,15 @@
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v10.5.0/ol.css">
+  <!-- OpenLayers CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v10.5.0/ol.css">
+  <!-- LayerSwitcher CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol-layerswitcher@4.1.1/dist/ol-layerswitcher.css" />
+  <!-- OpenLayers JS -->
+  <script src="https://cdn.jsdelivr.net/npm/ol@v10.5.0/dist/ol.js"></script>
+  <!-- LayerSwitcher JS -->
+  <script src="https://cdn.jsdelivr.net/npm/ol-layerswitcher@4.1.1"></script>
+
   <style>
     #map {
       width: 100%;
@@ -478,26 +487,7 @@
       }
     });
 
-    // Toggle e Opacità per HungaryAADmap2022
-    const toggleAAD = document.getElementById('toggle-aad-layer');
-    const opacityAAD = document.getElementById('opacity-aad');
-    const opacityAADValue = document.getElementById('opacity-aad-value');
-
-    toggleAAD.addEventListener('change', function () {
-      if (HungaryAADmap2022) {
-        HungaryAADmap2022.setVisible(this.checked);
-  }
-});
-
-opacityAAD.addEventListener('input', function () {
-  if (HungaryAADmap2022) {
-    HungaryAADmap2022.setOpacity(parseFloat(opacityAAD.value));
-    opacityAADValue.textContent = Math.round(this.value * 100) + '%';
-  }
-});
-
   });
-
   </script>
 
   <!-- Main JS File -->
