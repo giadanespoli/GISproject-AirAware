@@ -371,6 +371,51 @@
     });
     map.addLayer(no2Concentration);
 
+    // Adding the Map Layers from the GeoServer
+    let HUNGARY_LC_reclassified_2022 = new ol.layer.Image({
+      source: new ol.source.ImageWMS({
+        url: 'https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_12/wms',
+        params: { 'LAYERS': 'gisgeoserver_12:HUNGARY_LC_reclassified_2022' },
+      })
+    });
+    map.addLayer(HUNGARY_LC_reclassified_2022);
+
+    // Adding the Map Layers from the GeoServer
+    let 	HungaryAADmap2022 = new ol.layer.Image({
+      source: new ol.source.ImageWMS({
+        url: 'https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_12/wms',
+        params: { 'LAYERS': 'HungaryAADmap2022' },
+      })
+    });
+    map.addLayer(HungaryAADmap2022);
+
+    // Adding the Map Layers from the GeoServer
+    let hungary_no2_2020_bivariate = new ol.layer.Image({
+      source: new ol.source.ImageWMS({
+        url: 'https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_12/wms',
+        params: { 'LAYERS': 'hungary_no2_2020_bivariate' },
+      })
+    });
+    map.addLayer(hungary_no2_2020_bivariate);
+
+    // Adding the Map Layers from the GeoServer
+    let hungaryno22020bivariate = new ol.layer.Image({
+      source: new ol.source.ImageWMS({
+        url: 'https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_12/wms',
+        params: { 'LAYERS': 'hungaryno22020bivariate' },
+      })
+    });
+    map.addLayer(hungaryno22020bivariate);
+
+     // Adding the Map Layers from the GeoServer
+    let hungaryno2zonalstatistics20132022 = new ol.layer.Image({
+      source: new ol.source.ImageWMS({
+        url: 'https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_12/wms',
+        params: { 'LAYERS': 'hungaryno2zonalstatistics20132022' },
+      })
+    });
+    map.addLayer(hungaryno2zonalstatistics20132022);
+
     let countryLayer;
 
     fetch('assets/data/hungary.geojson')
