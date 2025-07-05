@@ -168,7 +168,7 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="home.html">Home</a></li>
+          <li><a href="index.html">Home</a></li>
           <li><a href="workflow.html">Workflow</a></li>
           <li><a href="results.html">Results</a></li>
           <li><a href="webgis.html" class="active">WebGIS</a></li>
@@ -234,7 +234,7 @@
         </div>
 
         <div class="col-lg-4 col-md-12 footer-about">
-          <a href="home.html" class="logo d-flex align-items-center">
+          <a href="index.html" class="logo d-flex align-items-center">
             <span class="sitename">AirAware</span>
           </a>
           <p><strong>Air matters. Data speaks. Maps reveal.</strong><br>
@@ -245,7 +245,7 @@
         <div class="col-lg-2 col-6 footer-links">
           <h4>Pollutants</h4>
           <ul>
-            <li><a href="home.html#pollutants-info">Overview</a></li>
+            <li><a href="index.html#pollutants-info">Overview</a></li>
             <li><a href="results.html#pm2p5-title">PM<sub>2.5</sub></a></li>
             <li><a href="results.html#pm10-title">PM<sub>10</sub></a></li>
             <li><a href="results.html#no2-title">NO<sub>2</sub></a></li>
@@ -314,7 +314,7 @@
         }, false);
       }
     }
-    const initialCoordinates = [19.0402, 47.4979]; // Budapest as an example
+    const initialCoordinates = [19.5033, 47.1625];
     const initialZoom = 7;
 
     const map = new ol.Map({
@@ -397,7 +397,6 @@
     });
 
     const toggleMain = document.getElementById('toggle-country-layer');
-    // const toggleLegend = document.getElementById('toggle-country-layer-legend');
 
     [toggleMain, toggleLegend].forEach(toggle => {
       toggle.addEventListener('change', function () {
