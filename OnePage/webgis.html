@@ -95,6 +95,11 @@
       background: #e6e6e6;
     }
 
+    .layer-switcher input {
+      margin-right: 8px;
+      accent-color: #4485C8;
+    }
+
     .ol-mouse-position.custom-mouse-coords {
       box-sizing: content-box;
       white-space: nowrap;
@@ -354,252 +359,265 @@
       }
     }
 
-// Center map on the Hungary and set initial zoom
-const initialCoordinates = [19.5033, 47.1625];
-const initialZoom = 7;
+    // Center map on the Hungary and set initial zoom
+    const initialCoordinates = [19.5033, 47.1625];
+    const initialZoom = 7;
 
-const wmsUrl = "https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_12/wms";
+    const wmsUrl = "https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_12/wms";
 
-// Define the 5 WMS layers
-const Hungary_no2_concentration_map_2020 = new ol.layer.Tile({
-  title: "NO<sub>2</sub> Concentration Map",
-  visible: true,
-  source: new ol.source.TileWMS({
-    url: wmsUrl,
-    params: { "LAYERS":"gisgeoserver_12:Hungary_no2_concentration_map_2020", 
-    "STYLES": "Hungary_no2_concentration_map_2020",
-    "TILED":true
-   },
-    serverType: "geoserver"
-  })
-});
-
-const Hungary_pm10_concentration_map_2020 = new ol.layer.Tile({
-  title: "PM<sub>10</sub> Concentration Map",
-  visible: true,
-  source: new ol.source.TileWMS({
-    url: wmsUrl,
-    params: { "LAYERS":"gisgeoserver_12:Hungary_pm10_concentration_map_2020", 
-    "STYLES": "Hungary_pm10s_concentration_map_2020",
-    "TILED":true
-   },
-    serverType: "geoserver"
-  })
-});
-
-const Hungary_pm25_concentration_map_2020 = new ol.layer.Tile({
-  title: "PM<sub>2.5</sub> Concentration Map",
-  visible: true,
-  source: new ol.source.TileWMS({
-    url: wmsUrl,
-    params: { "LAYERS":"Hungary_pm2p5_concentration_map_2020", 
-    "STYLES": "Hungary_pm10s_concentration_map_2020",
-    "TILED":true
-   },
-    serverType: "geoserver"
-  })
-});
-
-const landCover2022 = new ol.layer.Tile({
-  title: "HUNGARY_LC_reclassified_2022",
-  visible: false,
-  source: new ol.source.TileWMS({
-    url: wmsUrl,
-    params: { "LAYERS":"gisgeoserver_12:HUNGARY_LC_reclassified_2022", 
-    "STYLES": "HUNGARY_LC_reclassified_2022",  
-    "TILED":true
-    },
-    
-    serverType: "geoserver"
-  })
-});
-
-const HungaryAADmap2022no2 = new ol.layer.Tile({
-  title: "NO<sub>2</sub> AAD Map",
-  visible: false,
-  source: new ol.source.TileWMS({
-    url: wmsUrl,
-    params: { "LAYERS":"gisgeoserver_12:HungaryAADmap2022no2", 
-    "STYLES":"Hungary_no2_2017-2021_AAD_map_2022",
-    "TILED":true 
-  },
-    serverType: "geoserver"
-  })
-});
-
-const HungaryAADmap2022pm10 = new ol.layer.Tile({
-  title: "PM<sub>10</sub> AAD Map",
-  visible: false,
-  source: new ol.source.TileWMS({
-    url: wmsUrl,
-    params: { "LAYERS":"gisgeoserver_12:HungaryAADmap2022pm10", 
-    "STYLES":"Hungary_no2_2017-2021_AAD_map_2022",
-    "TILED":true 
-  },
-    serverType: "geoserver"
-  })
-});
-
-const HungaryAADmap2022pm25 = new ol.layer.Tile({
-  title: "PM<sub>2.5</sub> AAD Map",
-  visible: false,
-  source: new ol.source.TileWMS({
-    url: wmsUrl,
-    params: { "LAYERS":"gisgeoserver_12:HungaryAADmap2022pm25", 
-    "STYLES":"Hungary_no2_2017-2021_AAD_map_2022",
-    "TILED":true 
-  },
-    serverType: "geoserver"
-  })
-});
-
-const no2Bivariate2020 = new ol.layer.Tile({
-  title: "NO<sub>2</sub> Bivariate",
-  visible: false,
-  source: new ol.source.TileWMS({
-    url: wmsUrl,
-    params: { "LAYERS":"gisgeoserver_12:hungaryno22020bivariate", 
-    "STYLES": "Hungary_no2_2020_bivariate",  
-    "TILED":true },
-    serverType: "geoserver"
-  })
-});
-
-const no2ZonalStats = new ol.layer.Tile({
-  title: "NO<sub>2</sub> Zonal Statistics",
-  visible: false,
-  source: new ol.source.TileWMS({
-    url: wmsUrl,
-    params: { "LAYERS":"gisgeoserver_12:hungaryno2zonalstatistics20132022	", "TILED":true },
-    serverType: "geoserver"
-  })
-});
-
-const concentration_map_2020 = new ol.layer.Group({
-  title: "Concentration maps 2020",
-  fold: "close",
-  layers: [
-    Hungary_no2_concentration_map_2020,
-    Hungary_pm10_concentration_map_2020,
-    Hungary_pm25_concentration_map_2020
-  ]
-});
-
-const annualaveragedifference = new ol.layer.Group({
-  title: "2022 Annual Average Difference",
-  fold: "close",
-  layers: [
-    HungaryAADmap2022no2,
-    HungaryAADmap2022pm10,
-    HungaryAADmap2022pm25
-  ]
-});
-
-const zonal_statistics_20132022 = new ol.layer.Group({
-  title: "Zonal Statistics 2013-2022",
-  fold: "close",
-  layers: [
-    no2ZonalStats,
-  ]
-});
-
-const bivariate2020 = new ol.layer.Group({
-  title: "Bivariate 2020",
-  fold: "close",
-  layers: [
-    no2Bivariate2020,
-  ]
-});
-
-// CREA LA MAPPA CON OSM + IL GRUPPO
-const baseMaps = new ol.layer.Group({
-  title: "Base maps",
-  fold: "open",
-  type: "overlay",
-  layers: [
-    new ol.layer.Tile({
-      title: "OpenStreetMap",
-      type: "base",
-      visible: true,
-      source: new ol.source.OSM()
-    }),
-    new ol.layer.Tile({
-      title: "Stamen Terrain",
-      type: "base",
+    // Define the 5 WMS layers
+    const Hungary_no2_concentration_map_2020 = new ol.layer.Tile({
+      title: "NO<sub>2</sub> 2020 Concentration Map",
       visible: false,
-      source: new ol.source.StadiaMaps({
-        layer: 'stamen_terrain',
-        retina: true
-        })
-      }),
-    ]
-});
-
-const map = new ol.Map({
-  target: "map",
-  layers: [baseMaps, concentration_map_2020, annualaveragedifference, zonal_statistics_20132022, bivariate2020], // aggiungili subito qui!
-  view: new ol.View({
-    center: ol.proj.fromLonLat([19.0, 47.0]),
-    zoom: initialZoom
-  })
-});
-
-// Add LayerSwitcher on top right
-const layerSwitcher = new LayerSwitcher({
-  activationMode: "click",
-  startActive: true,
-  groupSelectStyle: "group"
-});
-map.addControl(layerSwitcher);
-
-// Add other controls
-map.addControl(new RecenterControl({ target: 'map-controls' }));
-map.addControl(new ol.control.FullScreen({ target: 'map-controls' }));
-map.addControl(new ol.control.ScaleLine());
-map.addControl(new ol.control.MousePosition({
-  coordinateFormat: ol.coordinate.createStringXY(4),
-  projection: 'EPSG:4326',
-  className: 'ol-mouse-position custom-mouse-coords',
-  placeholder: '0.0000, 0.0000',
-  target: document.getElementById('mouse-coords-container')
-}));
-
-// Add Hungary GeoJSON country layer with opacity + toggle
-let countryLayer;
-fetch('assets/data/hungary.geojson')
-.then(res => res.json())
-.then(geojson => {
-  countryLayer = new ol.layer.Vector({
-    source: new ol.source.Vector({
-      features: new ol.format.GeoJSON().readFeatures(geojson, {
-        featureProjection: 'EPSG:3857'
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: {
+          "LAYERS": "gisgeoserver_12:Hungary_no2_concentration_map_2020",
+          "STYLES": "Hungary_no2_concentration_map_2020",
+          "TILED": true
+        },
+        serverType: "geoserver"
       })
-    }),
-    style: new ol.style.Style({
-      stroke: new ol.style.Stroke({ color: 'red', width: 2 }),
-      fill: new ol.style.Fill({ color: 'rgba(255, 0, 0, 0.4)' })
-    })
-  });
-  map.addLayer(countryLayer);
+    });
 
-  // Country layer toggle + opacity slider
-  document.getElementById('toggle-country-layer').addEventListener('change', function() {
-    countryLayer.setVisible(this.checked);
-  });
-  document.getElementById('opacity-country').addEventListener('input', function() {
-    countryLayer.setOpacity(parseFloat(this.value));
-    document.getElementById('opacity-country-value').textContent = Math.round(this.value * 100) + '%';
-  });
-});
+    const Hungary_pm10_concentration_map_2020 = new ol.layer.Tile({
+      title: "PM<sub>10</sub> 2020 Concentration Map",
+      visible: false,
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: {
+          "LAYERS": "gisgeoserver_12:Hungary_pm10_concentration_map_2020",
+          "STYLES": "Hungary_pm10s_concentration_map_2020",
+          "TILED": true
+        },
+        serverType: "geoserver"
+      })
+    });
 
-// Custom NO2 slider and toggle
-document.getElementById('toggle-no2-layer').addEventListener('change', function() {
-  no2Concentration.setVisible(this.checked);
-});
-document.getElementById('opacity-no2').addEventListener('input', function() {
-  no2Concentration.setOpacity(parseFloat(this.value));
-  document.getElementById('opacity-no2-value').textContent = Math.round(this.value * 100) + '%';
-});
+    const Hungary_pm25_concentration_map_2020 = new ol.layer.Tile({
+      title: "PM<sub>2.5</sub> 2020 Concentration Map",
+      visible: false,
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: {
+          "LAYERS": "Hungary_pm2p5_concentration_map_2020",
+          "STYLES": "Hungary_pm10s_concentration_map_2020",
+          "TILED": true
+        },
+        serverType: "geoserver"
+      })
+    });
+
+    const landCover2022 = new ol.layer.Tile({
+      title: "HUNGARY_LC_reclassified_2022",
+      visible: false,
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: {
+          "LAYERS": "gisgeoserver_12:HUNGARY_LC_reclassified_2022",
+          "STYLES": "HUNGARY_LC_reclassified_2022",
+          "TILED": true
+        },
+
+        serverType: "geoserver"
+      })
+    });
+
+    const HungaryAADmap2022no2 = new ol.layer.Tile({
+      title: "NO<sub>2</sub> 2022 AAD Map",
+      visible: false,
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: {
+          "LAYERS": "gisgeoserver_12:HungaryAADmap2022no2",
+          "STYLES": "Hungary_no2_2017-2021_AAD_map_2022",
+          "TILED": true
+        },
+        serverType: "geoserver"
+      })
+    });
+
+    const HungaryAADmap2022pm10 = new ol.layer.Tile({
+      title: "PM<sub>10</sub> 2022 AAD Map",
+      visible: false,
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: {
+          "LAYERS": "gisgeoserver_12:HungaryAADmap2022pm10",
+          "STYLES": "Hungary_no2_2017-2021_AAD_map_2022",
+          "TILED": true
+        },
+        serverType: "geoserver"
+      })
+    });
+
+    const HungaryAADmap2022pm25 = new ol.layer.Tile({
+      title: "PM<sub>2.5</sub> 2022 AAD Map",
+      visible: false,
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: {
+          "LAYERS": "gisgeoserver_12:HungaryAADmap2022pm25",
+          "STYLES": "Hungary_no2_2017-2021_AAD_map_2022",
+          "TILED": true
+        },
+        serverType: "geoserver"
+      })
+    });
+
+    const no2Bivariate2020 = new ol.layer.Tile({
+      title: "NO<sub>2</sub> 2020 Bivariate",
+      visible: true,
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: {
+          "LAYERS": "gisgeoserver_12:hungaryno22020bivariate",
+          "STYLES": "Hungary_no2_2020_bivariate",
+          "TILED": true
+        },
+        serverType: "geoserver"
+      })
+    });
+
+    const no2ZonalStats = new ol.layer.Tile({
+      title: "NO<sub>2</sub> 2013-2022 Zonal Statistics",
+      visible: true,
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: { "LAYERS": "gisgeoserver_12:hungaryno2zonalstatistics20132022	", "TILED": true },
+        serverType: "geoserver"
+      })
+    });
+
+    const concentration_map_2020 = new ol.layer.Group({
+      title: "Concentration Maps",
+      visible: false,
+      fold: "close",
+      layers: [
+        Hungary_no2_concentration_map_2020,
+        Hungary_pm10_concentration_map_2020,
+        Hungary_pm25_concentration_map_2020
+      ]
+    });
+
+    const annualaveragedifference = new ol.layer.Group({
+      title: "Annual Average Difference",
+      visible: false,
+      fold: "close",
+      layers: [
+        HungaryAADmap2022no2,
+        HungaryAADmap2022pm10,
+        HungaryAADmap2022pm25
+      ]
+    });
+
+    const zonal_statistics_20132022 = new ol.layer.Group({
+      title: "Zonal Statistics",
+      visible: false,
+      fold: "close",
+      layers: [
+        no2ZonalStats,
+      ]
+    });
+
+    const bivariate2020 = new ol.layer.Group({
+      title: "Bivariate",
+      visible: false,
+      fold: "close",
+      layers: [
+        no2Bivariate2020,
+      ]
+    });
+
+    // CREA LA MAPPA CON OSM + IL GRUPPO
+    const baseMaps = new ol.layer.Group({
+      title: "Base maps",
+      fold: "close",
+      type: "overlay",
+      layers: [
+        new ol.layer.Tile({
+          title: "OpenStreetMap",
+          type: "base",
+          visible: true,
+          source: new ol.source.OSM()
+        }),
+        new ol.layer.Tile({
+          title: "Stamen Terrain",
+          type: "base",
+          visible: false,
+          source: new ol.source.StadiaMaps({
+            layer: 'stamen_terrain',
+            retina: true
+          })
+        }),
+      ]
+    });
+
+    const map = new ol.Map({
+      target: "map",
+      layers: [baseMaps, concentration_map_2020, annualaveragedifference, zonal_statistics_20132022, bivariate2020], // aggiungili subito qui!
+      view: new ol.View({
+        center: ol.proj.fromLonLat([19.5033, 47.1625]),
+        zoom: initialZoom
+      })
+    });
+
+    // Add LayerSwitcher on top right
+    const layerSwitcher = new LayerSwitcher({
+      activationMode: "click",
+      startActive: false,
+      groupSelectStyle: "group"
+    });
+    map.addControl(layerSwitcher);
+
+    // Add other controls
+    map.addControl(new RecenterControl({ target: 'map-controls' }));
+    map.addControl(new ol.control.FullScreen({ target: 'map-controls' }));
+    map.addControl(new ol.control.ScaleLine());
+    map.addControl(new ol.control.MousePosition({
+      coordinateFormat: ol.coordinate.createStringXY(4),
+      projection: 'EPSG:4326',
+      className: 'ol-mouse-position custom-mouse-coords',
+      placeholder: '0.0000, 0.0000',
+      target: document.getElementById('mouse-coords-container')
+    }));
+
+    // Add Hungary GeoJSON country layer with opacity + toggle
+    let countryLayer;
+    fetch('assets/data/hungary.geojson')
+      .then(res => res.json())
+      .then(geojson => {
+        countryLayer = new ol.layer.Vector({
+          source: new ol.source.Vector({
+            features: new ol.format.GeoJSON().readFeatures(geojson, {
+              featureProjection: 'EPSG:3857'
+            })
+          }),
+          style: new ol.style.Style({
+            stroke: new ol.style.Stroke({ color: 'red', width: 2 }),
+            fill: new ol.style.Fill({ color: 'rgba(255, 0, 0, 0.4)' })
+          })
+        });
+        map.addLayer(countryLayer);
+
+        // Country layer toggle + opacity slider
+        document.getElementById('toggle-country-layer').addEventListener('change', function () {
+          countryLayer.setVisible(this.checked);
+        });
+        document.getElementById('opacity-country').addEventListener('input', function () {
+          countryLayer.setOpacity(parseFloat(this.value));
+          document.getElementById('opacity-country-value').textContent = Math.round(this.value * 100) + '%';
+        });
+      });
+
+    // Custom NO2 slider and toggle
+    document.getElementById('toggle-no2-layer').addEventListener('change', function () {
+      no2Concentration.setVisible(this.checked);
+    });
+    document.getElementById('opacity-no2').addEventListener('input', function () {
+      no2Concentration.setOpacity(parseFloat(this.value));
+      document.getElementById('opacity-no2-value').textContent = Math.round(this.value * 100) + '%';
+    });
   </script>
 
   <!-- Main JS File -->
