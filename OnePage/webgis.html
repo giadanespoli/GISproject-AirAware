@@ -365,7 +365,7 @@ const no2Concentration = new ol.layer.Tile({
 });
 const landCover2022 = new ol.layer.Tile({
   title: "HUNGARY_LC_reclassified_2022",
-  visible: true,
+  visible: false,
   source: new ol.source.TileWMS({
     url: wmsUrl,
     params: { "LAYERS":"gisgeoserver_12:HUNGARY_LC_reclassified_2022", 
@@ -378,19 +378,19 @@ const landCover2022 = new ol.layer.Tile({
 });
 const no2AAD2022 = new ol.layer.Tile({
   title: "HungaryAADmap2022",
-  visible: true,
+  visible: false,
   source: new ol.source.TileWMS({
     url: wmsUrl,
-    params: { "LAYERS":"gisgeoserver_12:Hungary_no2_2017-2021_AAD_map_2022", "TILED":true },
+    params: { "LAYERS":"gisgeoserver_12:HungaryAADmap2022", "TILED":true },
     serverType: "geoserver"
   })
 });
 const no2Bivariate2020 = new ol.layer.Tile({
   title: "hungaryno22020bivariate",
-  visible: true,
+  visible: false,
   source: new ol.source.TileWMS({
     url: wmsUrl,
-    params: { "LAYERS":"gisgeoserver_12:Hungary_no2_2020_bivariate_map", 
+    params: { "LAYERS":"gisgeoserver_12:hungaryno22020bivariate	", 
     "STYLES": "Hungary_no2_2020_bivariate",  
     "TILED":true },
     serverType: "geoserver"
@@ -398,10 +398,10 @@ const no2Bivariate2020 = new ol.layer.Tile({
 });
 const no2ZonalStats = new ol.layer.Tile({
   title: "hungaryno2zonalstatistics20132022",
-  visible: true,
+  visible: false,
   source: new ol.source.TileWMS({
     url: wmsUrl,
-    params: { "LAYERS":"gisgeoserver_12:Hungary_no2_zonal_statistics_2013-2022", "TILED":true },
+    params: { "LAYERS":"gisgeoserver_12:hungaryno2zonalstatistics20132022	", "TILED":true },
     serverType: "geoserver"
   })
 });
@@ -410,17 +410,11 @@ const no2Group = new ol.layer.Group({
   title: "NO2 Layers",
   fold: "open",
   layers: [
-    new ol.layer.Group({
-      title: "Yearly NO2 Maps",
-      fold: "open",
-      layers: [no2Concentration, no2AAD2022]
-    }),
-    new ol.layer.Group({
-      title: "Advanced NO2 Maps",
-      fold: "open",
-      layers: [no2Bivariate2020, no2ZonalStats]
-    }),
-    landCover2022
+    no2AAD2022,
+    no2ZonalStats,
+    no2Bivariate2020,
+    landCover2022,
+    no2Concentration
   ]
 });
 
