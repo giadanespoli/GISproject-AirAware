@@ -220,7 +220,8 @@
           </ol>
         </nav>
       </div>
-    </div><!-- End Page Title -->
+    </div>
+    <!-- End Page Title -->
 
     <!-- WebGIS Section -->
     <section id="webgis" class="service-details section">
@@ -229,11 +230,18 @@
           markers or regions for more information. The map displays air quality measurements (such as pollutant
           concentrations or AQI) with color-coded markers and layers to indicate pollution levels.</p>
       </div>
+      
       <div id="map">
         <div id="map-controls"></div>
         <div id="mouse-coords-container"></div>
-        <div id="map-legend">
-          <h5>Map Legend</h5>
+
+        <!-- Legend Section -->
+        <div id="legend" class="legend-container">
+          <span class="legend-title">Legend</span>
+          <div id="legend-content" class="legend-content">
+          </div>
+        </div>  
+          <h5>Legend</h5>
 
           <!-- Hungary Outline Layer -->
           <div class="legend-item">
@@ -545,11 +553,38 @@
           source: new ol.source.OSM()
         }),
         new ol.layer.Tile({
+          title: "Stamen Watercolor",
+          type: "base",
+          visible: false,
+          source: new ol.source.StadiaMaps({
+            layer: 'stamen_watercolor',
+            retina: true
+          })
+        }),
+        new ol.layer.Tile({
           title: "Stamen Terrain",
           type: "base",
           visible: true,
           source: new ol.source.StadiaMaps({
             layer: 'stamen_terrain',
+            retina: true
+          })
+        }),
+        new ol.layer.Tile({
+          title: "Alidade Satellite",
+          type: "base",
+          visible: false,
+          source: new ol.source.StadiaMaps({
+            layer: 'alidade_satellite',
+            retina: true
+          })
+        }),
+        new ol.layer.Tile({
+          title: "Alidade Smooth",
+          type: "base",
+          visible: false,
+          source: new ol.source.StadiaMaps({
+            layer: 'alidade_smooth',
             retina: true
           })
         }),
