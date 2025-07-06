@@ -407,15 +407,20 @@ const no2ZonalStats = new ol.layer.Tile({
 });
 
 const no2Group = new ol.layer.Group({
-  title: "NO2layers",
+  title: "NO2 Layers",
   fold: "open",
-  type: "overlay",
   layers: [
-    landCover2022,
-    no2Concentration,
-    no2AAD2022,
-    no2Bivariate2020,
-    no2ZonalStats,
+    new ol.layer.Group({
+      title: "Yearly NO2 Maps",
+      fold: "open",
+      layers: [no2Concentration, no2AAD2022]
+    }),
+    new ol.layer.Group({
+      title: "Advanced NO2 Maps",
+      fold: "open",
+      layers: [no2Bivariate2020, no2ZonalStats]
+    }),
+    landCover2022
   ]
 });
 
