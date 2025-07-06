@@ -381,7 +381,10 @@ const no2AAD2022 = new ol.layer.Tile({
   visible: false,
   source: new ol.source.TileWMS({
     url: wmsUrl,
-    params: { "LAYERS":"gisgeoserver_12:HungaryAADmap2022", "TILED":true },
+    params: { "LAYERS":"gisgeoserver_12:HungaryAADmap2022", 
+    "STYLES":"Hungary_no2_2017-2021_AAD_map_2022",
+    "TILED":true 
+  },
     serverType: "geoserver"
   })
 });
