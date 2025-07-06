@@ -144,7 +144,7 @@
     #map-legend {
       position: absolute;
       top: 4em;
-      right: 1em;
+      left: 1em;
       background: white;
       border: 1px solid #ccc;
       padding: 10px 15px;
@@ -350,152 +350,161 @@
         }, false);
       }
     }
-    // Initial Coordinates set to the cente of Hungary and Setting the Initial Zoom Level
-    const initialCoordinates = [19.5033, 47.1625];
-    const initialZoom = 7;
+const initialCoordinates = [19.5033, 47.1625];
+const initialZoom = 7;
 
-    // Create the Base Map
-    const map = new ol.Map({
-      target: 'map',
-      layers: [
-        new ol.layer.Tile({
-          source: new ol.source.OSM()
-        })
-      ],
-      view: new ol.View({
-        center: ol.proj.fromLonLat(initialCoordinates),
-        zoom: initialZoom
+const wmsUrl = "https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_12/wms";
+
+// Define the 5 WMS layers
+const no2Concentration = new ol.layer.Tile({
+  title: "no2Concentration",
+  visible: true,
+  source: new ol.source.TileWMS({
+    url: wmsUrl,
+    params: { "LAYERS":"gisgeoserver_12:Hungary_no2_concentration_map_2020", 
+    "STYLES": "Hungary_no2_concentration_map_2020",
+    "TILED":true
+   },
+    serverType: "geoserver"
+  })
+});
+const landCover2022 = new ol.layer.Tile({
+  title: "HUNGARY_LC_reclassified_2022",
+  visible: true,
+  source: new ol.source.TileWMS({
+    url: wmsUrl,
+    params: { "LAYERS":"gisgeoserver_12:HUNGARY_LC_reclassified_2022", 
+    "STYLES": "HUNGARY_LC_reclassified_2022",  
+    "TILED":true
+    },
+    
+    serverType: "geoserver"
+  })
+});
+const no2AAD2022 = new ol.layer.Tile({
+  title: "HungaryAADmap2022",
+  visible: true,
+  source: new ol.source.TileWMS({
+    url: wmsUrl,
+    params: { "LAYERS":"gisgeoserver_12:Hungary_no2_2017-2021_AAD_map_2022", "TILED":true },
+    serverType: "geoserver"
+  })
+});
+const no2Bivariate2020 = new ol.layer.Tile({
+  title: "hungaryno22020bivariate",
+  visible: true,
+  source: new ol.source.TileWMS({
+    url: wmsUrl,
+    params: { "LAYERS":"gisgeoserver_12:Hungary_no2_2020_bivariate_map", 
+    "STYLES": "Hungary_no2_2020_bivariate",  
+    "TILED":true },
+    serverType: "geoserver"
+  })
+});
+const no2ZonalStats = new ol.layer.Tile({
+  title: "hungaryno2zonalstatistics20132022",
+  visible: true,
+  source: new ol.source.TileWMS({
+    url: wmsUrl,
+    params: { "LAYERS":"gisgeoserver_12:Hungary_no2_zonal_statistics_2013-2022", "TILED":true },
+    serverType: "geoserver"
+  })
+});
+
+const no2Group = new ol.layer.Group({
+  title: "NO2layers",
+  fold: "open",
+  type: "overlay",
+  layers: [
+    landCover2022,
+    no2Concentration,
+    no2AAD2022,
+    no2Bivariate2020,
+    no2ZonalStats,
+  ]
+});
+
+// CREA LA MAPPA CON OSM + IL GRUPPO
+const baseMaps = new ol.layer.Group({
+  title: "Base maps",
+  fold: "open",
+  type: "overlay",
+  layers: [
+    new ol.layer.Tile({
+      title: "OpenStreetMap",
+      type: "base",
+      visible: true,
+      source: new ol.source.OSM()
+    })
+  ]
+});
+
+const map = new ol.Map({
+  target: "map",
+  layers: [baseMaps, no2Group], // aggiungili subito qui!
+  view: new ol.View({
+    center: ol.proj.fromLonLat([19.0, 47.0]),
+    zoom: initialZoom
+  })
+});
+
+
+// Add LayerSwitcher on top right
+const layerSwitcher = new LayerSwitcher({
+  activationMode: "click",
+  startActive: true,
+  groupSelectStyle: "children"
+});
+map.addControl(layerSwitcher);
+
+// Add other controls
+map.addControl(new RecenterControl({ target: 'map-controls' }));
+map.addControl(new ol.control.FullScreen({ target: 'map-controls' }));
+map.addControl(new ol.control.ScaleLine());
+map.addControl(new ol.control.MousePosition({
+  coordinateFormat: ol.coordinate.createStringXY(4),
+  projection: 'EPSG:4326',
+  className: 'ol-mouse-position custom-mouse-coords',
+  placeholder: '0.0000, 0.0000',
+  target: document.getElementById('mouse-coords-container')
+}));
+
+// Add Hungary GeoJSON country layer with opacity + toggle
+let countryLayer;
+fetch('assets/data/hungary.geojson')
+.then(res => res.json())
+.then(geojson => {
+  countryLayer = new ol.layer.Vector({
+    source: new ol.source.Vector({
+      features: new ol.format.GeoJSON().readFeatures(geojson, {
+        featureProjection: 'EPSG:3857'
       })
-    });
-
-    map.addControl(new RecenterControl({ target: 'map-controls' }));
-    map.addControl(new ol.control.FullScreen({ target: 'map-controls' }));
-    map.addControl(new ol.control.ScaleLine());
-    map.addControl(new ol.control.MousePosition({
-      coordinateFormat: ol.coordinate.createStringXY(4),
-      projection: 'EPSG:4326',
-      className: 'ol-mouse-position custom-mouse-coords',
-      placeholder: '0.0000, 0.0000',
-      target: document.getElementById('mouse-coords-container')
-    }));
-
-    // Adding the Map Layers from the GeoServer
-    let no2Concentration = new ol.layer.Image({
-      source: new ol.source.ImageWMS({
-        url: 'https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_12/wms',
-        params: { 'LAYERS': 'gisgeoserver_12:Hungary_no2_concentration_map_2020' },
-      })
-    });
-    map.addLayer(no2Concentration);
-
-    // Adding the Map Layers from the GeoServer
-    let HUNGARY_LC_reclassified_2022 = new ol.layer.Image({
-      source: new ol.source.ImageWMS({
-        url: 'https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_12/wms',
-        params: { 'LAYERS': 'gisgeoserver_12:HUNGARY_LC_reclassified_2022' },
-      })
-    });
-    map.addLayer(HUNGARY_LC_reclassified_2022);
-
-    // Adding the Map Layers from the GeoServer
-    let 	HungaryAADmap2022 = new ol.layer.Image({
-      source: new ol.source.ImageWMS({
-        url: 'https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_12/wms',
-        params: { 'LAYERS': 'HungaryAADmap2022' },
-      })
-    });
-    map.addLayer(HungaryAADmap2022);
-
-    // Adding the Map Layers from the GeoServer
-    let hungary_no2_2020_bivariate = new ol.layer.Image({
-      source: new ol.source.ImageWMS({
-        url: 'https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_12/wms',
-        params: { 'LAYERS': 'hungary_no2_2020_bivariate' },
-      })
-    });
-    map.addLayer(hungary_no2_2020_bivariate);
-
-    // Adding the Map Layers from the GeoServer
-    let hungaryno22020bivariate = new ol.layer.Image({
-      source: new ol.source.ImageWMS({
-        url: 'https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_12/wms',
-        params: { 'LAYERS': 'hungaryno22020bivariate' },
-      })
-    });
-    map.addLayer(hungaryno22020bivariate);
-
-     // Adding the Map Layers from the GeoServer
-    let hungaryno2zonalstatistics20132022 = new ol.layer.Image({
-      source: new ol.source.ImageWMS({
-        url: 'https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_12/wms',
-        params: { 'LAYERS': 'hungaryno2zonalstatistics20132022' },
-      })
-    });
-    map.addLayer(hungaryno2zonalstatistics20132022);
-
-    let countryLayer;
-
-    fetch('assets/data/hungary.geojson')
-      .then(res => res.json())
-      .then(geojson => {
-        countryLayer = new ol.layer.Vector({
-          source: new ol.source.Vector({
-            features: new ol.format.GeoJSON().readFeatures(geojson, {
-              featureProjection: 'EPSG:3857'
-            })
-          }),
-          style: new ol.style.Style({
-            stroke: new ol.style.Stroke({
-              color: 'red',
-              width: 2
-            }),
-            fill: new ol.style.Fill({
-              color: 'rgba(255, 0, 0, 0.4)'
-            })
-          })
-        });
-
-        map.addLayer(countryLayer);
-
-    // Country Layer Toggle and Opacity
-    const toggleCountry = document.getElementById('toggle-country-layer');
-    const opacityCountry = document.getElementById('opacity-country');
-    const opacityCountryValue = document.getElementById('opacity-country-value');
-
-    // Country Layer Event Listeners
-    toggleCountry.addEventListener('change', function () {
-      if (countryLayer) {
-        countryLayer.setVisible(this.checked);
-      }
-    });
-
-    opacityCountry.addEventListener('input', function () {
-      if (countryLayer) {
-        countryLayer.setOpacity(parseFloat(opacityCountry.value));
-        opacityCountryValue.textContent = Math.round(this.value * 100) + '%';
-      }
-    });
-
-    // NO2 Layer Toggle and Opacity
-    const toggleNo2 = document.getElementById('toggle-no2-layer');
-    const opacityNo2 = document.getElementById('opacity-no2');
-    const opacityNo2Value = document.getElementById('opacity-no2-value');
-
-    // NO2 Layer Event Listeners
-    toggleNo2.addEventListener('change', function () {
-      if (no2Concentration) {
-        no2Concentration.setVisible(this.checked);
-      }
-    });
-
-    opacityNo2.addEventListener('input', function () {
-      if (no2Concentration) {
-        no2Concentration.setOpacity(parseFloat(opacityNo2.value));
-        opacityNo2Value.textContent = Math.round(this.value * 100) + '%';
-      }
-    });
-
+    }),
+    style: new ol.style.Style({
+      stroke: new ol.style.Stroke({ color: 'red', width: 2 }),
+      fill: new ol.style.Fill({ color: 'rgba(255, 0, 0, 0.4)' })
+    })
   });
+  map.addLayer(countryLayer);
+
+  // Country layer toggle + opacity slider
+  document.getElementById('toggle-country-layer').addEventListener('change', function() {
+    countryLayer.setVisible(this.checked);
+  });
+  document.getElementById('opacity-country').addEventListener('input', function() {
+    countryLayer.setOpacity(parseFloat(this.value));
+    document.getElementById('opacity-country-value').textContent = Math.round(this.value * 100) + '%';
+  });
+});
+
+// Custom NO2 slider and toggle
+document.getElementById('toggle-no2-layer').addEventListener('change', function() {
+  no2Concentration.setVisible(this.checked);
+});
+document.getElementById('opacity-no2').addEventListener('input', function() {
+  no2Concentration.setOpacity(parseFloat(this.value));
+  document.getElementById('opacity-no2-value').textContent = Math.round(this.value * 100) + '%';
+});
   </script>
 
   <!-- Main JS File -->
