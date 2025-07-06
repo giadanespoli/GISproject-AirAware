@@ -359,8 +359,8 @@ const initialZoom = 7;
 const wmsUrl = "https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_12/wms";
 
 // Define the 5 WMS layers
-const no2Concentration = new ol.layer.Tile({
-  title: "no2Concentration",
+const Hungary_no2_concentration_map_2020 = new ol.layer.Tile({
+  title: "Hungary_no2_concentration_map_2020",
   visible: true,
   source: new ol.source.TileWMS({
     url: wmsUrl,
@@ -371,6 +371,34 @@ const no2Concentration = new ol.layer.Tile({
     serverType: "geoserver"
   })
 });
+
+const Hungary_pm10_concentration_map_2020 = new ol.layer.Tile({
+  title: "Hungary_pm10_concentration_map_2020",
+  visible: true,
+  source: new ol.source.TileWMS({
+    url: wmsUrl,
+    params: { "LAYERS":"gisgeoserver_12:Hungary_pm10_concentration_map_2020", 
+    "STYLES": "Hungary_pm10s_concentration_map_2020",
+    "TILED":true
+   },
+    serverType: "geoserver"
+  })
+});
+
+const Hungary_pm25_concentration_map_2020 = new ol.layer.Tile({
+  title: "Hungary_pm25_concentration_map_2020",
+  visible: true,
+  source: new ol.source.TileWMS({
+    url: wmsUrl,
+    params: { "LAYERS":"Hungary_pm2p5_concentration_map_2020", 
+    "STYLES": "Hungary_pm10s_concentration_map_2020",
+    "TILED":true
+   },
+    serverType: "geoserver"
+  })
+});
+
+
 const landCover2022 = new ol.layer.Tile({
   title: "HUNGARY_LC_reclassified_2022",
   visible: false,
@@ -384,24 +412,52 @@ const landCover2022 = new ol.layer.Tile({
     serverType: "geoserver"
   })
 });
-const no2AAD2022 = new ol.layer.Tile({
-  title: "HungaryAADmap2022",
+const HungaryAADmap2022no2 = new ol.layer.Tile({
+  title: "HungaryAADmap2022no2",
   visible: false,
   source: new ol.source.TileWMS({
     url: wmsUrl,
-    params: { "LAYERS":"gisgeoserver_12:HungaryAADmap2022", 
+    params: { "LAYERS":"gisgeoserver_12:HungaryAADmap2022no2", 
     "STYLES":"Hungary_no2_2017-2021_AAD_map_2022",
     "TILED":true 
   },
     serverType: "geoserver"
   })
 });
+
+const HungaryAADmap2022pm10 = new ol.layer.Tile({
+  title: "HungaryAADmap2022pm10",
+  visible: false,
+  source: new ol.source.TileWMS({
+    url: wmsUrl,
+    params: { "LAYERS":"gisgeoserver_12:HungaryAADmap2022pm10", 
+    "STYLES":"Hungary_no2_2017-2021_AAD_map_2022",
+    "TILED":true 
+  },
+    serverType: "geoserver"
+  })
+});
+
+const HungaryAADmap2022pm25 = new ol.layer.Tile({
+  title: "HungaryAADmap2022pm25",
+  visible: false,
+  source: new ol.source.TileWMS({
+    url: wmsUrl,
+    params: { "LAYERS":"gisgeoserver_12:HungaryAADmap2022pm25", 
+    "STYLES":"Hungary_no2_2017-2021_AAD_map_2022",
+    "TILED":true 
+  },
+    serverType: "geoserver"
+  })
+});
+
+
 const no2Bivariate2020 = new ol.layer.Tile({
   title: "hungaryno22020bivariate",
   visible: false,
   source: new ol.source.TileWMS({
     url: wmsUrl,
-    params: { "LAYERS":"gisgeoserver_12:hungaryno22020bivariate	", 
+    params: { "LAYERS":"gisgeoserver_12:hungaryno22020bivariate", 
     "STYLES": "Hungary_no2_2020_bivariate",  
     "TILED":true },
     serverType: "geoserver"
@@ -421,7 +477,9 @@ const concentration_map_2020 = new ol.layer.Group({
   title: "Concentration maps 2020",
   fold: "close",
   layers: [
-    no2Concentration,
+    Hungary_no2_concentration_map_2020,
+    Hungary_pm10_concentration_map_2020,
+    Hungary_pm25_concentration_map_2020
   ]
 });
 
@@ -429,7 +487,9 @@ const annualaveragedifference = new ol.layer.Group({
   title: "2022 Annual Average Difference",
   fold: "close",
   layers: [
-    no2AAD2022,
+    HungaryAADmap2022no2,
+    HungaryAADmap2022pm10,
+    HungaryAADmap2022pm25
   ]
 });
 
