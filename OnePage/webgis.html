@@ -253,13 +253,13 @@
           <!-- Landcover Classification Layer -->
            <div class="legend-item">
             <label>
-              <input type="checkbox" id="toggle-country-layer" checked>
+              <input type="checkbox" id="toggle-landcover-layer" checked>
               <span style="border-left: 12px solid red; padding-left: 6px;">Landcover Classification</span>
             </label>
             <div style="margin-top: 5px;">
-              <label for="opacity-country">Opacity:</label>
-              <input type="range" id="opacity-country" min="0" max="1" step="0.05" value="0.4">
-              <span id="opacity-country-value">40%</span>
+              <label for="opacity-landcover">Opacity:</label>
+              <input type="range" id="opacity-landcover" min="0" max="1" step="0.05" value="0.8">
+              <span id="opacity-landcover-value">80%</span>
             </div>
           </div>
 
@@ -374,6 +374,19 @@
     const wmsUrl = "https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_12/wms";
 
     // Layer Tiles and Definitions
+    const landCover2022 = new ol.layer.Tile({
+      title: "", // To have this layer not appear in LayerSwitcher
+      visible: true,
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: {
+          "LAYERS": "gisgeoserver_12:HUNGARY_LC_reclassified_2022",
+          "FORMAT": "image/png"
+        },
+        serverType: "geoserver"
+      })
+    });
+    
     const Hungary_no2_concentration_map_2020 = new ol.layer.Tile({
       title: "NO<sub>2</sub> 2020 Concentration Map",
       visible: true,
@@ -410,20 +423,6 @@
         params: {
           "LAYERS": "gisgeoserver_12:Hungary_pm2p5_concentration_map_2020",
           "STYLES": "Hungary_no2_concentration_map_2020",
-          "TILED": true
-        },
-        serverType: "geoserver"
-      })
-    });
-
-    const landCover2022 = new ol.layer.Tile({
-      title: "HUNGARY_LC_reclassified_2022",
-      visible: true,
-      source: new ol.source.TileWMS({
-        url: wmsUrl,
-        params: {
-          "LAYERS": "gisgeoserver_12:HUNGARY_LC_reclassified_2022",
-          "STYLES": "HUNGARY_LC_reclassified_2022",
           "TILED": true
         },
         serverType: "geoserver"
@@ -601,7 +600,7 @@
       ]
     });
 
-    
+
     // CREA LA MAPPA CON OSM + IL GRUPPO
     const baseMaps = new ol.layer.Group({
       title: "Base maps",
@@ -709,6 +708,19 @@
           document.getElementById('opacity-country-value').textContent = Math.round(this.value * 100) + '%';
         });
       });
+    
+    // Lancover Layer Toggle and Opacity  
+    map.addLayer(landCover2022);
+    
+    document.getElementById('toggle-landcover-layer').addEventListener('change', function () {
+      landCover2022.setVisible(this.checked);
+    });
+    
+    document.getElementById('opacity-landcover').addEventListener('input', function () {
+      landCover2022.setOpacity(parseFloat(this.value));
+      document.getElementById('opacity-landcover-value').textContent = Math.round(this.value * 100) + '%';
+    });
+
   </script>
 
   <!-- Main JS File -->
