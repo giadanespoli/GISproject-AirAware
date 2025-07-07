@@ -373,7 +373,7 @@
 
     const wmsUrl = "https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_12/wms";
 
-    // Define the 5 WMS layers
+    // Layer Tiles and Definitions
     const Hungary_no2_concentration_map_2020 = new ol.layer.Tile({
       title: "NO<sub>2</sub> 2020 Concentration Map",
       visible: true,
@@ -426,7 +426,6 @@
           "STYLES": "HUNGARY_LC_reclassified_2022",
           "TILED": true
         },
-
         serverType: "geoserver"
       })
     });
@@ -515,7 +514,6 @@
       })
     });
 
-
     const hungaryno2zonalstatistics20132022 = new ol.layer.Tile({
       title: "NO<sub>2</sub> 2013-2022 Zonal Statistics",
       visible: true,
@@ -558,6 +556,7 @@
       })
     });
 
+    // Layer Groups
     const concentration_map_2020 = new ol.layer.Group({
       title: "Concentration Maps",
       visible: false,
@@ -602,6 +601,7 @@
       ]
     });
 
+    
     // CREA LA MAPPA CON OSM + IL GRUPPO
     const baseMaps = new ol.layer.Group({
       title: "Base maps",
