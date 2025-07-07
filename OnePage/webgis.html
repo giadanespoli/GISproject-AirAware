@@ -383,27 +383,27 @@
     });
 
     const Hungary_pm10_concentration_map_2020 = new ol.layer.Tile({
-      title: "PM<sub>10</sub> 2020 Concentration Map",
+      title: "Hungary_pm10_concentration_map_2020",
       visible: true,
       source: new ol.source.TileWMS({
         url: wmsUrl,
         params: {
           "LAYERS": "gisgeoserver_12:Hungary_pm10_concentration_map_2020",
-          "STYLES": "Hungary_pm10s_concentration_map_2020",
+          "STYLES": "Hungary_no2_concentration_map_2020",
           "TILED": true
         },
         serverType: "geoserver"
       })
     });
 
-    const Hungary_pm25_concentration_map_2020 = new ol.layer.Tile({
-      title: "PM<sub>2.5</sub> 2020 Concentration Map",
+    const Hungary_pm2p5_concentration_map_2020 = new ol.layer.Tile({
+      title: "Hungary_pm2p5_concentration_map_2020",
       visible: true,
       source: new ol.source.TileWMS({
         url: wmsUrl,
         params: {
-          "LAYERS": "Hungary_pm2p5_concentration_map_2020",
-          "STYLES": "Hungary_pm10s_concentration_map_2020",
+          "LAYERS": "gisgeoserver_12:Hungary_pm2p5_concentration_map_2020",
+          "STYLES": "Hungary_no2_concentration_map_2020",
           "TILED": true
         },
         serverType: "geoserver"
@@ -467,13 +467,13 @@
       })
     });
 
-    const no2Bivariate2020 = new ol.layer.Tile({
-      title: "NO<sub>2</sub> 2020 Bivariate",
+    const Hungary_no2_2020_bivariate = new ol.layer.Tile({
+      title: "Hungary_no2_2020_bivariate",
       visible: true,
       source: new ol.source.TileWMS({
         url: wmsUrl,
         params: {
-          "LAYERS": "gisgeoserver_12:hungaryno22020bivariate",
+          "LAYERS": "gisgeoserver_12:Hungary_no2_2020_bivariate",
           "STYLES": "Hungary_no2_2020_bivariate",
           "TILED": true
         },
@@ -481,13 +481,71 @@
       })
     });
 
-    const no2ZonalStats = new ol.layer.Tile({
-      title: "NO<sub>2</sub> 2013-2022 Zonal Statistics",
+    const Hungary_pm10_2020_bivariate = new ol.layer.Tile({
+      title: "Hungary_pm10_2020_bivariate",
+      visible: true,
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: {
+          "LAYERS": "gisgeoserver_12:Hungary_pm10_2020_bivariate",
+          "STYLES": "Hungary_no2_2020_bivariate",
+          "TILED": true
+        },
+        serverType: "geoserver"
+      })
+    });
+
+    const Hungary_pm2p5_2020_bivariate = new ol.layer.Tile({
+      title: "Hungary_pm2p5_2020_bivariate",
+      visible: true,
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: {
+          "LAYERS": "gisgeoserver_12:Hungary_pm2p5_2020_bivariate",
+          "STYLES": "Hungary_no2_2020_bivariate",
+          "TILED": true
+        },
+        serverType: "geoserver"
+      })
+    });
+
+
+    const hungaryno2zonalstatistics20132022 = new ol.layer.Tile({
+      title: "	hungaryno2zonalstatistics20132022",
       visible: true,
       source: new ol.source.TileWMS({
         url: wmsUrl,
         params: {
           "LAYERS": "gisgeoserver_12:hungaryno2zonalstatistics20132022",
+          "STYLES": "Hungary_no2_zonal_statistics_2013-2022",
+          "TILED": true
+        },
+        serverType: "geoserver"
+      })
+    });
+    
+    const hungarypm10zonalstatistics20132022 = new ol.layer.Tile({
+      title: "	hungarypm10zonalstatistics20132022",
+      visible: true,
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: {
+          "LAYERS": "gisgeoserver_12:hungarypm10zonalstatistics20132022",
+          "STYLES": "Hungary_no2_zonal_statistics_2013-2022",
+          "TILED": true
+        },
+        serverType: "geoserver"
+      })
+    });
+
+    const hungarypm25zonalstatistics20132022 = new ol.layer.Tile({
+      title: "	hungarypm25zonalstatistics20132022",
+      visible: true,
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: {
+          "LAYERS": "gisgeoserver_12:hungarypm25zonalstatistics20132022",
+          "STYLES": "Hungary_no2_zonal_statistics_2013-2022",
           "TILED": true
         },
         serverType: "geoserver"
@@ -501,7 +559,7 @@
       layers: [
         Hungary_no2_concentration_map_2020,
         Hungary_pm10_concentration_map_2020,
-        Hungary_pm25_concentration_map_2020
+        Hungary_pm2p5_concentration_map_2020
       ]
     });
 
@@ -521,7 +579,9 @@
       visible: false,
       fold: "close",
       layers: [
-        no2ZonalStats,
+        hungaryno2zonalstatistics20132022,
+        hungarypm10zonalstatistics20132022,
+        hungarypm25zonalstatistics20132022
       ]
     });
 
@@ -530,7 +590,9 @@
       visible: false,
       fold: "close",
       layers: [
-        no2Bivariate2020,
+        Hungary_no2_2020_bivariate,
+        Hungary_pm10_2020_bivariate,
+        Hungary_pm2p5_2020_bivariate
       ]
     });
 
