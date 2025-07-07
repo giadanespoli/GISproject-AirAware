@@ -39,6 +39,12 @@ modify package.json like this:
 # Switch to your branch for editing
 | git checkout your-feature-branch-main
 
+# Keep your feature branch up to date with main (do this regularly)
+| git checkout main
+| git pull origin main
+| git checkout your-feature-branch-name
+| git rebase main
+
 - Edit your files in VS Code
 
 # Stage, commit and push your changes
