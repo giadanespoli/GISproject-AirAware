@@ -249,6 +249,20 @@
               <span id="opacity-country-value">40%</span>
             </div>
           </div>
+
+          <!-- Landcover Classification Layer -->
+           <div class="legend-item">
+            <label>
+              <input type="checkbox" id="toggle-country-layer" checked>
+              <span style="border-left: 12px solid red; padding-left: 6px;">Landcover Classification</span>
+            </label>
+            <div style="margin-top: 5px;">
+              <label for="opacity-country">Opacity:</label>
+              <input type="range" id="opacity-country" min="0" max="1" step="0.05" value="0.4">
+              <span id="opacity-country-value">40%</span>
+            </div>
+          </div>
+
         </div>
     </section>
     <!-- /WebGIS Section -->
@@ -383,7 +397,7 @@
     });
 
     const Hungary_pm10_concentration_map_2020 = new ol.layer.Tile({
-      title: "Hungary_pm10_concentration_map_2020",
+      title: "PM<sub>10</sub> 2020 Concentration Map",
       visible: true,
       source: new ol.source.TileWMS({
         url: wmsUrl,
@@ -397,7 +411,7 @@
     });
 
     const Hungary_pm2p5_concentration_map_2020 = new ol.layer.Tile({
-      title: "Hungary_pm2p5_concentration_map_2020",
+      title: "PM<sub>2.5</sub> 2020 Concentration Map",
       visible: true,
       source: new ol.source.TileWMS({
         url: wmsUrl,
@@ -468,7 +482,7 @@
     });
 
     const Hungary_no2_2020_bivariate = new ol.layer.Tile({
-      title: "Hungary_no2_2020_bivariate",
+      title: "NO<sub>2</sub> 2020 Bivariate",
       visible: true,
       source: new ol.source.TileWMS({
         url: wmsUrl,
@@ -482,7 +496,7 @@
     });
 
     const Hungary_pm10_2020_bivariate = new ol.layer.Tile({
-      title: "Hungary_pm10_2020_bivariate",
+      title: "PM<sub>10</sub> 2020 Bivariate",
       visible: true,
       source: new ol.source.TileWMS({
         url: wmsUrl,
@@ -496,7 +510,7 @@
     });
 
     const Hungary_pm2p5_2020_bivariate = new ol.layer.Tile({
-      title: "Hungary_pm2p5_2020_bivariate",
+      title: "PM<sub>2.5</sub> 2020 Bivariate",
       visible: true,
       source: new ol.source.TileWMS({
         url: wmsUrl,
@@ -511,7 +525,7 @@
 
 
     const hungaryno2zonalstatistics20132022 = new ol.layer.Tile({
-      title: "	hungaryno2zonalstatistics20132022",
+      title: "NO<sub>2</sub> 2013-2022 Zonal Statistics",
       visible: true,
       source: new ol.source.TileWMS({
         url: wmsUrl,
@@ -525,7 +539,7 @@
     });
     
     const hungarypm10zonalstatistics20132022 = new ol.layer.Tile({
-      title: "	hungarypm10zonalstatistics20132022",
+      title: "PM<sub>10</sub> 2013-2022 Zonal Statistics",
       visible: true,
       source: new ol.source.TileWMS({
         url: wmsUrl,
@@ -539,7 +553,7 @@
     });
 
     const hungarypm25zonalstatistics20132022 = new ol.layer.Tile({
-      title: "	hungarypm25zonalstatistics20132022",
+      title: "PM<sub>2.5</sub> 2013-2022 Zonal Statistics",
       visible: true,
       source: new ol.source.TileWMS({
         url: wmsUrl,
