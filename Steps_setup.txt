@@ -1,4 +1,4 @@
-
+## Project Setup ##
 
 1. npm init -y
 
@@ -23,6 +23,7 @@ modify package.json like this:
 3. npm install lite-server --save-dev
 
 4. npm start
+
 
 ## Working with Git ##
 
