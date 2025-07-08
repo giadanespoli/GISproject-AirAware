@@ -95,7 +95,8 @@
       background: #e6e6e6;
     }
 
-    .layer-switcher input {
+    .layer-switcher {
+      background-color: transparent;
       margin-right: 8px;
       accent-color: #4485C8;
     }
@@ -253,13 +254,13 @@
           <!-- Landcover Classification Layer -->
            <div class="legend-item">
             <label>
-              <input type="checkbox" id="toggle-landcover-layer" checked>
-              <span style="border-left: 12px solid red; padding-left: 6px;">Landcover Classification</span>
+              <input type="checkbox" id="toggle-landcover-layer">
+              <span style="padding-left: 6px;">Landcover Classification</span>
             </label>
             <div style="margin-top: 5px;">
               <label for="opacity-landcover">Opacity:</label>
-              <input type="range" id="opacity-landcover" min="0" max="1" step="0.05" value="0.8">
-              <span id="opacity-landcover-value">80%</span>
+              <input type="range" id="opacity-landcover" min="0" max="1" step="0.05" value="1.0">
+              <span id="opacity-landcover-value">100%</span>
             </div>
           </div>
 
@@ -376,7 +377,7 @@
     // Layer Tiles and Definitions
     const landCover2022 = new ol.layer.Tile({
       title: "", // To have this layer not appear in LayerSwitcher
-      visible: true,
+      visible: false,
       source: new ol.source.TileWMS({
         url: wmsUrl,
         params: {
