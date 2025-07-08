@@ -263,6 +263,8 @@
               <span id="opacity-landcover-value">100%</span>
             </div>
           </div>
+
+          <!-- Bivariate Legend -->
           <div id="bivariate-legend" style="
               display: none;
               margin-top: 20px;
@@ -277,20 +279,7 @@
             <img src="assets/img/bivariate.png" alt="Bivariate Legend" style="width: 500px;">
           </div>
 
-          <div id="bivariate-legend" style="
-              display: none;
-              margin-top: 20px;
-              background: rgba(255,255,255,0.9);
-              padding: 12px;
-              border-radius: 8px;
-              box-shadow: 0 1px 6px rgba(0,0,0,0.3);
-              max-width: 600px;
-              margin-left: 20px;
-          ">
-            <h6 style="margin: 0 0 8px 0;">Bivariate Legend</h6>
-            <img src="assets/img/bivariate.png" alt="Bivariate Legend" style="width: 500px;">
-          </div>
-
+          <!-- Annual Average Difference Legend -->
           <div id="AAD-legend" style="
               display: none;
               margin-top: 20px;
@@ -301,10 +290,11 @@
               max-width: 600px;
               margin-left: 20px;
           ">
-            <h6 style="margin: 0 0 8px 0;">Bivariate Legend</h6>
+            <h6 style="margin: 0 0 8px 0;">Annual Average Difference</h6>
             <img src="assets/img/AAD_symbology.png" alt="Annual Average Difference Legend" style="width: 500px;">
           </div>
 
+          <!-- Concentration Maps Legend -->
           <div id="concentration-legend" style="
               display: none;
               margin-top: 20px;
@@ -315,10 +305,11 @@
               max-width: 600px;
               margin-left: 20px;
           ">
-            <h6 style="margin: 0 0 8px 0;">Bivariate Legend</h6>
+            <h6 style="margin: 0 0 8px 0;">Concentration Maps</h6>
             <img src="assets/img/EU_limits.png" alt="Concentration maps Legend" style="width: 500px;">
           </div>
 
+          <!-- Landcover Legend -->
           <div id="landCover2022-legend" style="
               display: none;
               margin-top: 20px;
@@ -329,7 +320,7 @@
               max-width: 600px;
               margin-left: 20px;
           ">
-            <h6 style="margin: 0 0 8px 0;">landCover2022 Legend</h6>
+            <h6 style="margin: 0 0 8px 0;">Landcover</h6>
             <img src="assets/img/IPCCLegend.png" alt="landCover2022 Legend" style="width: 400px;">
           </div>
         </div>
@@ -499,7 +490,7 @@
     });
 
     const Hungary_average_no2_2022 = new ol.layer.Tile({
-      title: "Hungary_average_no2_2022",
+      title: "NO<sub>2</sub> 2022 Average",
       visible: true,
       source: new ol.source.TileWMS({
         url: wmsUrl,
@@ -513,7 +504,7 @@
     });
 
     const Hungary_average_pm10_2022 = new ol.layer.Tile({
-      title: "Hungary_average_pm10_2022",
+      title: "PM<sub>10</sub> 2022 Average",
       visible: true,
       source: new ol.source.TileWMS({
         url: wmsUrl,
@@ -527,7 +518,7 @@
     });
 
     const Hungary_average_pm2p5_2022 = new ol.layer.Tile({
-      title: "Hungary_average_pm2p5_2022",
+      title: "PM<sub>2.5</sub> 2022 Average",
       visible: true,
       source: new ol.source.TileWMS({
         url: wmsUrl,
@@ -679,7 +670,7 @@
     });
 
     const Average_pollutant_maps_2022 = new ol.layer.Group({
-      title: "Average_pollutant_maps_2022",
+      title: "Average Pollutant Maps",
       visible: false,
       fold: "close",
       layers: [
