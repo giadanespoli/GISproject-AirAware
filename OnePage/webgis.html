@@ -437,6 +437,48 @@
       })
     });
 
+    const Hungary_average_no2_2022 = new ol.layer.Tile({
+      title: "Hungary_average_no2_2022",
+      visible: true,
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: {
+          "LAYERS": "gisgeoserver_12:Hungary_average_no2_2022",
+          "STYLES": "Hungary_average_no2_2022",
+          "TILED": true
+        },
+        serverType: "geoserver"
+      })
+    });
+
+    const Hungary_average_pm10_2022 = new ol.layer.Tile({
+      title: "Hungary_average_pm10_2022",
+      visible: true,
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: {
+          "LAYERS": "gisgeoserver_12:Hungary_average_pm10_2022",
+          "STYLES": "Hungary_average_no2_2022",
+          "TILED": true
+        },
+        serverType: "geoserver"
+      })
+    });
+
+    const Hungary_average_pm2p5_2022 = new ol.layer.Tile({
+      title: "Hungary_average_pm2p5_2022",
+      visible: true,
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: {
+          "LAYERS": "gisgeoserver_12:Hungary_average_pm2p5_2022",
+          "STYLES": "Hungary_average_no2_2022",
+          "TILED": true
+        },
+        serverType: "geoserver"
+      })
+    });
+
     const HungaryAADmap2022no2 = new ol.layer.Tile({
       title: "NO<sub>2</sub> 2022 AAD Map",
       visible: true,
@@ -575,6 +617,17 @@
       ]
     });
 
+    const Average_pollutant_maps_2022 = new ol.layer.Group({
+      title: "Average_pollutant_maps_2022",
+      visible: false,
+      fold: "close",
+      layers: [
+        Hungary_average_no2_2022,
+        Hungary_average_pm10_2022,
+        Hungary_average_pm2p5_2022
+      ]
+    });
+
     const annualaveragedifference = new ol.layer.Group({
       title: "Annual Average Difference",
       visible: false,
@@ -662,7 +715,7 @@
 
     const map = new ol.Map({
       target: "map",
-      layers: [baseMaps, concentration_map_2020, annualaveragedifference, zonal_statistics_20132022, bivariate2020], // aggiungili subito qui!
+      layers: [baseMaps, concentration_map_2020, annualaveragedifference, Average_pollutant_maps_2022, zonal_statistics_20132022, bivariate2020], // aggiungili subito qui!
       view: new ol.View({
         center: ol.proj.fromLonLat([19.5033, 47.1625]),
         zoom: initialZoom
