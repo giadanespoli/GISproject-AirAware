@@ -263,6 +263,61 @@
               <span id="opacity-landcover-value">100%</span>
             </div>
           </div>
+          <div id="bivariate-legend" style="
+              display: none;
+              margin-top: 20px;
+              background: rgba(255,255,255,0.9);
+              padding: 12px;
+              border-radius: 8px;
+              box-shadow: 0 1px 6px rgba(0,0,0,0.3);
+              max-width: 600px;
+              margin-left: 20px;
+          ">
+            <h6 style="margin: 0 0 8px 0;">Bivariate Legend</h6>
+            <img src="assets/img/bivariate.png" alt="Bivariate Legend" style="width: 500px;">
+          </div>
+
+          <div id="bivariate-legend" style="
+              display: none;
+              margin-top: 20px;
+              background: rgba(255,255,255,0.9);
+              padding: 12px;
+              border-radius: 8px;
+              box-shadow: 0 1px 6px rgba(0,0,0,0.3);
+              max-width: 600px;
+              margin-left: 20px;
+          ">
+            <h6 style="margin: 0 0 8px 0;">Bivariate Legend</h6>
+            <img src="assets/img/bivariate.png" alt="Bivariate Legend" style="width: 500px;">
+          </div>
+
+          <div id="AAD-legend" style="
+              display: none;
+              margin-top: 20px;
+              background: rgba(255,255,255,0.9);
+              padding: 12px;
+              border-radius: 8px;
+              box-shadow: 0 1px 6px rgba(0,0,0,0.3);
+              max-width: 600px;
+              margin-left: 20px;
+          ">
+            <h6 style="margin: 0 0 8px 0;">Bivariate Legend</h6>
+            <img src="assets/img/AAD_symbology.png" alt="Annual Average Difference Legend" style="width: 500px;">
+          </div>
+
+          <div id="concentration-legend" style="
+              display: none;
+              margin-top: 20px;
+              background: rgba(255,255,255,0.9);
+              padding: 12px;
+              border-radius: 8px;
+              box-shadow: 0 1px 6px rgba(0,0,0,0.3);
+              max-width: 600px;
+              margin-left: 20px;
+          ">
+            <h6 style="margin: 0 0 8px 0;">Bivariate Legend</h6>
+            <img src="assets/img/EU_limits.png" alt="Concentration maps Legend" style="width: 500px;">
+          </div>
 
         </div>
     </section>
@@ -774,6 +829,51 @@
       landCover2022.setOpacity(parseFloat(this.value));
       document.getElementById('opacity-landcover-value').textContent = Math.round(this.value * 100) + '%';
     });
+
+    function updateBivariateLegend() {
+    let isVisible = bivariate2020.getVisible();
+    const legendDiv = document.getElementById('bivariate-legend');
+    if (isVisible) {
+        legendDiv.style.display = 'block';
+    } else {
+        legendDiv.style.display = 'none';
+    }
+}
+    // Ascolta il cambio di visibilità del gruppo bivariate
+    bivariate2020.on('change:visible', updateBivariateLegend);
+
+    // Imposta correttamente alla partenza
+    updateBivariateLegend();
+
+       function updateAADLegend() {
+    let isVisible = annualaveragedifference.getVisible();
+    const legendDiv = document.getElementById('AAD-legend');
+    if (isVisible) {
+        legendDiv.style.display = 'block';
+    } else {
+        legendDiv.style.display = 'none';
+    }
+}
+    // Ascolta il cambio di visibilità del gruppo bivariate
+    annualaveragedifference.on('change:visible', updateAADLegend);
+
+    // Imposta correttamente alla partenza
+    updateAADLegend();
+
+           function updateconcentrationLegend() {
+    let isVisible = concentration_map_2020.getVisible();
+    const legendDiv = document.getElementById('concentration-legend');
+    if (isVisible) {
+        legendDiv.style.display = 'block';
+    } else {
+        legendDiv.style.display = 'none';
+    }
+}
+    // Ascolta il cambio di visibilità del gruppo bivariate
+    concentration_map_2020.on('change:visible', updateconcentrationLegend);
+
+    // Imposta correttamente alla partenza
+    updateconcentrationLegend();
 
   </script>
 
