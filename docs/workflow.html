@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>AirAware - Workflow</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/AA.png" rel="icon"> 
+  <link href="assets/img/AirAware.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+</head>
+
+<body class="workflow-page">
+
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+      <a href="workflow.html" class="logo d-flex align-items-center me-auto">
+        <h1 class="sitename">AirAware</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="workflow.html" class="active">Workflow</a></li>
+          <li><a href="results.html">Results</a></li>
+          <li><a href="webgis.html">WebGIS</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title">
+      <div class="bg-image"></div>
+      <div class="content">
+        <h1>Workflow</h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li class="current">Workflow</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <!-- GN: Project -->
+    <section id="project" class="section">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Our approach</h2>
+          <p>Integrating Copernicus reanalysis datasets for comprehensive air quality insights</p>
+        </div>
+
+        
+        <div class="col-lg-12">
+          <p>AirAware builds upon the open data infrastructure provided by the
+            <a href="https://atmosphere.copernicus.eu/" target="_blank" rel="noopener noreferrer">Copernicus Atmosphere Monitoring Service (CAMS)</a>
+            , particularly leveraging the <a href="https://ads.atmosphere.copernicus.eu/datasets/cams-europe-air-quality-reanalyses?tab=overview" target="_blank" rel="noopener noreferrer">Copernicus Atmosphere Monitoring Service (CAMS) Reanalysis</a> datasets. 
+            These datasets integrate satellite observations, ground-based sensor measurements, and advanced atmospheric modeling to deliver consistent, long-term records of key air pollutants such as PM<sub>2.5</sub>, PM<sub>10</sub> and NO<sub>2</sub> across Europe.
+            The project focuses on the period 2013-2022, extracting annual mean pollutant concentrations for Hungary by aggregating monthly data and complementing it with up-to-date land cover information from the European Space Agency. 
+            This allows us to isolate pollutant levels specifically over urban and built-up areas, critical for assessing population exposure.
+          </p>
+          <p>Understanding these trends is essential because air pollution remains one of the most pressing environmental and public health challenges, contributing to respiratory diseases, ecosystem degradation, and reduced quality of life. 
+            By combining pollutant data with population distribution maps, AirAware supports evidence-based decisions and raises awareness among communities and policymakers.
+          </p>
+        </div>
+
+      </div>
+
+    </section><!-- GN: Project -->
+
+    <!-- GN: Databases -->
+     <section id="databases" class="section">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Database and Data Sources</h2>
+          <p>A harmonized multi-source foundation for long-term air quality and exposure analysis</p>
+        </div>
+
+        
+        <div class="col-lg-12">
+          <p>The AirAware project uses multiple open-source datasets to build a robust and comprehensive database for air quality analysis. 
+            The primary air pollution data are obtained from the
+            <a href="https://ads.atmosphere.copernicus.eu/datasets/cams-europe-air-quality-reanalyses?tab=overview" target="_blank" rel="noopener noreferrer">Copernicus Atmosphere Monitoring Service (CAMS) Reanalysis</a>. 
+            This dataset provides monthly aggregated pollutant maps from 2013 up to November 2022. 
+            December 2022 data are processed separately to complete the annual coverage.
+          </p>
+          <p>Land cover data are collected for each year in the study period from the 
+            <a href="https://cds.climate.copernicus.eu/datasets/satellite-land-cover?tab=overview" target="_blank" rel="noopener noreferrer">Copernicus Land Monitoring Service</a>. 
+            This annual time series of land cover maps enables the project to analyze the evolution of land use and its relationship with pollution trends over time. 
+            The data are clipped and aligned with the study area to allow detailed spatial correlation between pollution and different land cover classes, with particular attention to built-up and urban zones.
+          </p>
+          <p>Population data for the study are derived from the WorldPop project, which provides high-resolution population estimates at a 100-meter scale. 
+            For the years 2013 to 2020, we use the 
+            <a href="https://hub.worldpop.org/geodata/listing?id=29" target="_blank" rel="noopener noreferrer">unconstrained estimation model dataset</a>, while for 2021 and 2022 we rely on the newer 
+            <a href="#" onclick="window.open('https://data.worldpop.org/GIS/Population/Global_2015_2030/R2024B/2021/HUN/'); window.open('https://data.worldpop.org/GIS/Population/Global_2015_2030/R2024B/2022/HUN/'); return false;" target="_blank" rel="noopener noreferrer">R2024B dataset</a>, also unconstrained and at 100-meter resolution.
+            Although these datasets differ slightly in their modelling approaches, we consider this difference acceptable for our analysis because our methodology focuses on population exposure quantiles rather than absolute values. 
+            This approach mitigates potential inconsistencies across years, ensuring robust comparisons over time.
+            By integrating this population data with air quality and land cover layers, the project enables an insightful assessment of pollution exposure patterns within different demographic contexts.
+          </p>
+          <p>All datasets undergo preprocessing to harmonize spatial resolution, temporal scales, and data quality, enabling consistent and accurate analyses and visualizations on the platform.
+          </p>
+        </div>
+
+      </div>
+
+    </section><!-- GN: Databases -->
+
+    <!-- GN: QGIS data processing -->
+    <section id="QGIS data processing" class="section">
+
+      <div class="container">
+        <div class="section-title">
+          <h2>QGIS data processing</h2>
+          <p>From raw data to spatial insight: processing air quality, land cover, and population datasets</p>
+        </div>
+          
+        <div class="row mt-4">
+          <div class="col-lg-12">
+            <h4 class="mb-3">
+              CAMS NetCDF Monthly and Yearly Aggregated Pollutants
+            </h4>
+          </div>
+          <div class="col-md-6 d-flex align-items-center">
+            <p>To obtain air pollution concentrations, we use monthly aggregated data from the 
+              CAMS European air quality reanalyses.
+              After downloading the NetCDF and GeoTIFF formats, the rasters are loaded into QGIS, reprojected to EPSG:4326, and clipped to the study area using an automated batch workflow. 
+              December 2022 is processed separately to complete the annual series. 
+              The monthly layers are then aggregated into annual means using the r.series tool in QGIS.
+            </p>
+          </div>
+          <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
+            <img src="assets/img/CAMS_monthly_mesh.png" alt="Raw CAMS Mesh Layer" class="img-fluid" style="max-height: 150px; object-fit: contain;">
+            <p class="small mt-2 text-muted">Original CAMS mesh layer from NetCDF file</p>
+          </div>
+          <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
+            <img src="assets/img/CAMS_monthly_aggregated.png" alt="Processed December 2022 Aggregated Layer" class="img-fluid" style="max-height: 150px; object-fit: contain;">
+            <p class="small mt-2 text-muted">Processed monthly aggregated layer</p>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-12">
+            <h4 class="mb-3">
+              Yearly Concentration Map
+            </h4>
+          </div>
+          <div class="col-md-6 d-flex align-items-center">
+            <p>The yearly average pollutant rasters are reclassified into five categories based on EU air quality thresholds. 
+              This step is automated using QGIS’s Reclassify by table tool to generate standardized and comparable concentration maps for each pollutant. 
+              These classified outputs are used in both visual analysis and in statistical summaries across regions and time.
+            </p>
+          </div>
+          <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+            <img src="assets/img/EU_limits.png" alt="Health guidelines" class="img-fluid" style="max-height: 150px; object-fit: contain;">
+            <p class="small mt-2 text-muted">EU classification levels based on annual average concentrations</p>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-lg-12">
+            <h4 class="mb-3">
+              Annual Average Difference from 5-year Mean
+            </h4>
+          </div>
+          <div class="col-md-6 d-flex align-items-center">
+            <p>To assess recent deviations from historical pollution trends, we compute the difference between 2022 annual values and the average of the previous five years (2017-2021). 
+              This is achieved using the Raster Calculator in QGIS, and the resulting maps highlight areas with increased or reduced pollution levels compared to recent norms. 
+              The resulting maps are categorized into defined pollution levels and styled using clear, intuitive colors, making it easier to interpret spatial patterns at a glance.
+            </p>
+          </div>
+          <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+            <img src="assets/img/AAD_symbology.png" alt="AAD Classification" class="img-fluid" style="max-height: 150px; object-fit: contain;">
+            <p class="small mt-2 text-muted">Classification of annual differences from the 5-year mean</p>
+          </div>
+        </div>
+        
+        <div class="row mt-4">
+          <div class="col-lg-12">
+            <h4 class="mb-3">
+              ESA CCI Land Cover Reclassification, Resampling, and Pollution Statistics
+            </h4>
+          </div>
+          <div class="col-md-6 d-flex align-items-center">
+            <p>Land cover data from ESA CCI are processed annually from 2013 to 2022. 
+              The lccs_class layers are reprojected and reclassified into broader IPCC categories: Agriculture, Forest, Grassland, Wetland, Settlement and Others. 
+              For class 6, we also include code 220 (Permanent Snow and Ice). 
+              This simplification improves readability and allows thematic comparisons. 
+              We resample the CAMS rasters to match the 300 m resolution of the land cover maps, enabling consistent overlay and integrated analysis.
+              To explore pollution trends in different environments, we compute zonal statistics using the reclassified land cover. 
+              Urban and built-up areas are extracted, vectorized, and used to summarize pollutant values over time, producing a time series of average and maximum concentrations by class. 
+              This supports interpretation of land use-pollution interactions and urban exposure dynamics.
+            </p>
+          </div>
+          <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+            <img src="assets/img/IPCC_land_cover_categories.png" alt="IPCC categories" class="img-fluid" style="max-height: 300px; object-fit: contain;">
+            <p class="small mt-2 text-muted">IPCC land cover categories</p>
+          </div>
+        </div>
+      
+        <div class="row mt-4">
+          <div class="col-lg-12">
+            <h4 class="mb-3">
+              Air Quality and Population Exposure
+            </h4>
+          </div>
+          <div class="col-md-6 d-flex align-items-center">
+            <p>Population data are harmonized and categorized into quantile-based classes. 
+              We then integrate these layers with pollutant concentration maps to calculate bivariate indicators at the administrative unit level. 
+              Each zone is characterized by both its population density class and pollutant class, allowing for the creation of bivariate maps that reveal where high pollution and population coincide. 
+              To visualize population exposure, we dissolve zones by pollutant class and calculate total population per class, producing pie charts and comparative summaries ready for web integration.
+            </p>
+          </div>
+          <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+            <img src="assets/img/bivariate.png" alt="Bivariate classification" style="max-height: 150px; object-fit: contain;">
+            <p class="small mt-2 text-muted">Bivariate classification</p>
+          </div>
+        </div>
+
+      </div>
+    
+    </section><!-- GN: QGIS data processing -->
+
+    <!-- GN: Website implementation -->
+    <section id="Website implementation" class="section">
+      
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Website Implementation</h2>
+          <p>Visualizing data for transparency and insight</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <p>The AirAware website is developed to provide interactive and intuitive access to the processed air quality data. 
+              The platform is built using HTML, CSS, and JavaScript, with data visualizations implemented primarily in D3.js for high customizability and performance. 
+              The main interface features stacked bar charts and pie charts to explore pollutant concentration trends, land cover dynamics, and population exposure patterns. 
+              Interactive legends, tooltips, and synchronized highlights across charts help users interpret the data effectively. 
+              The interactive maps on the platform are developed using modern web mapping technologies that enable dynamic visualization of spatial data. 
+              These tools support features such as zooming, panning, and layering, allowing users to explore pollutant distributions and land cover classifications seamlessly. 
+              The mapping interface is integrated with the data backend to provide real-time interaction and responsive updates.
+            </p>
+            <p>The website follows a modular design architecture that facilitates easy integration of new datasets and indicators over time. 
+              All heavy data processing, including spatial analysis and raster computations, is performed offline with QGIS and Python, while the frontend handles only the visualization of preprocessed results, minimizing client-side computation and maximizing performance.
+              This implementation strategy guarantees clarity, accessibility, and transparency, aligning with AirAware’s mission to foster informed public engagement and scientific communication around air quality.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer id="footer" class="footer light-background">
+    <div class="container footer-top">
+      <div class="row gy-3">
+        <div class="col-lg-2 col-md-12 footer-about">
+          <div style="width:150px; height:150px; overflow:hidden;">
+            <img src="assets/img/AirAware.png" alt="" style="width:100%; height:100%; object-fit: contain;">
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-12 footer-about">
+          <a href="home.html" class="logo d-flex align-items-center">
+            <span class="sitename">AirAware</span>
+          </a>
+          <p><strong>Air matters. Data speaks. Maps reveal.</strong><br>
+            A collaborative GIS project on air pollution in Hungary by three students from the MSc Geoinformatics
+            Engineering program at Politecnico di Milano.</p>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Pollutants</h4>
+          <ul>
+            <li><a href="home.html#pollutants-info">Overview</a></li>
+            <li><a href="results.html#pm2p5-title">PM<sub>2.5</sub></a></li>
+            <li><a href="results.html#pm10-title">PM<sub>10</sub></a></li>
+            <li><a href="results.html#no2-title">NO<sub>2</sub></a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-12 footer-contact text-center text-md-start">
+          <h4>Contact Us</h4>
+          <div class="contact-person">
+            <strong>Davide Galluzzo</strong> - 
+            <a href="mailto:davide.galluzzo@mail.polimi.it">davide.galluzzo@mail.polimi.it</a>
+            <a href="https://github.com/galluzzodavide" target="_blank" class="ms-2">
+              <i class="bi bi-github"></i>
+            </a>
+          </div>
+          <div class="contact-person">
+            <strong>Giada Nespoli</strong> - 
+            <a href="mailto:giada.nespoli@mail.polimi.it">giada.nespoli@mail.polimi.it</a>
+            <a href="https://github.com/giadanespoli" target="_blank" class="ms-2">
+              <i class="bi bi-github"></i>
+            </a>
+          </div>
+          <div class="contact-person">
+            <strong>Luciana Bertucci</strong> - 
+            <a href="mailto:luciana.bertucci@mail.polimi.it">luciana.bertucci@mail.polimi.it</a>
+            <a href="https://github.com/lucibertucci" target="_blank" class="ms-2">
+              <i class="bi bi-github"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">AirAware</strong> <span>All Rights Reserved</span></p>
+      <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
+  <div id="preloader"></div>
+
+  <!-- Vendor JS -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
+  <!-- Main JS -->
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>

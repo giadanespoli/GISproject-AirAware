@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>AirAware - WebGIS</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/AA.png" rel="icon">
+  <link href="assets/img/AirAware.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v10.5.0/ol.css">
+  <!-- OpenLayers CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v10.5.0/ol.css">
+  <!-- LayerSwitcher CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol-layerswitcher@4.1.1/dist/ol-layerswitcher.css" />
+  <!-- OpenLayers JS -->
+  <script src="https://cdn.jsdelivr.net/npm/ol@v10.5.0/dist/ol.js"></script>
+  <!-- LayerSwitcher JS -->
+  <script src="https://cdn.jsdelivr.net/npm/ol-layerswitcher@4.1.1"></script>
+  <link href="assets/css/main.css" rel="stylesheet">
+
+</head>
+
+<body class="webgis-page">
+
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+      <a href="home.html" class="logo d-flex align-items-center me-auto">
+        <h1 class="sitename">AirAware</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="workflow.html">Workflow</a></li>
+          <li><a href="results.html">Results</a></li>
+          <li><a href="webgis.html" class="active">WebGIS</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title">
+      <div class="bg-image"></div>
+      <div class="content">
+        <h1>WebGIS</h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li class="current">WebGIS</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <!-- End Page Title -->
+
+    <!-- WebGIS Section -->
+    <section id="webgis" class="service-details section">
+      <div class="container">
+        <p>Explore air quality data across Hungary with interactive maps.
+          You can toggle layers to view the <strong>annual average 2022</strong>, the <strong>annual average difference
+            2017-2022</strong>, and the
+          <strong>bivariate 2020</strong> map.</br>
+          Each map provides a unique perspective: the 2022 averages show recent pollutant concentrations, the difference
+          maps highlight changes over the last five years,
+          and the bivariate 2020 map combines pollution data with population distribution, reflecting exposure patterns
+          just before the COVID-19 pandemic—a snapshot of how air quality and population density interacted during that
+          period.
+        </p>
+        <p>
+          Adjust layer visibility and opacity directly on the map to explore data patterns and focus on specific
+          pollutants or temporal trends.
+        </p>
+      </div>
+
+      <div id="map">
+
+        <div id="map-controls"></div>
+
+        <div id="mouse-coords-container"></div>
+
+        <div id="map-legend">
+          <img id="legend-img" alt="Legend">
+        </div>
+
+      </div>
+
+    </section>
+    <!-- /WebGIS Section -->
+  </main>
+
+  <!-- End of Page-->
+  <footer id="footer" class="footer light-background">
+
+    <div class="container footer-top">
+
+      <div class="row gy-3">
+
+        <div class="col-lg-2 col-md-12 footer-about">
+          <div style="width:150px; height:150px; overflow:hidden;">
+            <img src="assets/img/AirAware.png" alt="" style="width:100%; height:100%; object-fit: contain;">
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-12 footer-about">
+          <a href="home.html" class="logo d-flex align-items-center">
+            <span class="sitename">AirAware</span>
+          </a>
+          <p><strong>Air matters. Data speaks. Maps reveal.</strong><br>
+            A collaborative GIS project on air pollution in Hungary by three students from the MSc Geoinformatics
+            Engineering program at Politecnico di Milano.</p>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Pollutants</h4>
+          <ul>
+            <li><a href="home.html#pollutants-info">Overview</a></li>
+            <li><a href="results.html#pm2p5-title">PM<sub>2.5</sub></a></li>
+            <li><a href="results.html#pm10-title">PM<sub>10</sub></a></li>
+            <li><a href="results.html#no2-title">NO<sub>2</sub></a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-12 footer-contact text-center text-md-start">
+          <h4>Contact Us</h4>
+          <div class="contact-person">
+            <strong>Davide Galluzzo</strong> -
+            <a href="mailto:davide.galluzzo@mail.polimi.it">davide.galluzzo@mail.polimi.it</a>
+            <a href="https://github.com/galluzzodavide" target="_blank" rel="noopener noreferrer" class="ms-2">
+              <i class="bi bi-github"></i>
+            </a>
+          </div>
+
+          <div class="contact-person">
+            <strong>Giada Nespoli</strong> -
+            <a href="mailto:giada.nespoli@mail.polimi.it">giada.nespoli@mail.polimi.it</a>
+            <a href="https://github.com/giadanespoli" target="_blank" rel="noopener noreferrer" class="ms-2">
+              <i class="bi bi-github"></i>
+            </a>
+          </div>
+
+          <div class="contact-person">
+            <strong>Luciana Bertucci</strong> -
+            <a href="mailto:luciana.bertucci@mail.polimi.it">luciana.bertucci@mail.polimi.it</a>
+            <a href="https://github.com/lucibertucci" target="_blank" rel="noopener noreferrer" class="ms-2">
+              <i class="bi bi-github"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container copyright text-center mt-4">
+      <p>©️ <span>Copyright</span> <strong class="px-1 sitename">AirAware</strong> <span>All Rights Reserved</span></p>
+      <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <!-- Vendor JS Files -->
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+  <script src="assets/js/map.js"></script>
+
+  <!-- GN: Map + Controls + Legends Configuration -->
+  <script>
+
+    // Initial map settings
+    const initialCoordinates = [19.5033, 47.1625]; // Hungary coordinates 
+    const initialZoom = 7.5; // Initial zoom level
+    const wmsUrl = "https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_12/wms"; // WMS server URL
+
+    // Base maps configuration
+    const baseMaps = new ol.layer.Group({
+      title: "Base maps",
+      fold: "close",
+      type: "overlay",
+      layers: [
+        new ol.layer.Tile({
+          title: "OpenStreetMap",
+          type: "base",
+          visible: false,
+          source: new ol.source.OSM()
+        }),
+        new ol.layer.Tile({
+          title: "Stamen Terrain",
+          type: "base",
+          visible: true,
+          source: new ol.source.StadiaMaps({
+            layer: 'stamen_terrain',
+            retina: true
+          })
+        }),
+        new ol.layer.Tile({
+          title: "Alidade Satellite",
+          type: "base",
+          visible: false,
+          source: new ol.source.StadiaMaps({
+            layer: 'alidade_satellite',
+            retina: true
+          })
+        }),
+        new ol.layer.Tile({
+          title: "Alidade Smooth",
+          type: "base",
+          visible: false,
+          source: new ol.source.StadiaMaps({
+            layer: 'alidade_smooth',
+            retina: true
+          })
+        }),
+      ]
+    });
+
+    // Hungary outline map layer
+    // Hungary border outline layer
+    const countryLayerOutline = new ol.layer.Vector({
+      title: "Hungary Outline",
+      visible: true,
+      source: new ol.source.Vector({
+        url: 'assets/data/hungary.geojson',
+        format: new ol.format.GeoJSON()
+      }),
+      style: new ol.style.Style({
+        stroke: new ol.style.Stroke({ color: 'red', width: 2 }),
+        fill: new ol.style.Fill({ color: 'rgba(0, 0, 0, 0)' }) // Transparent fill
+      })
+    });
+    // Hungary filled area layer
+    const countryLayerFilled = new ol.layer.Vector({
+      title: "Hungary Filled",
+      visible: true,
+      source: new ol.source.Vector({
+        url: 'assets/data/hungary.geojson',
+        format: new ol.format.GeoJSON()
+      }),
+      style: new ol.style.Style({
+        stroke: null,
+        fill: new ol.style.Fill({ color: 'rgba(255, 0, 0, 0.4)' }) // Semi-transparent red fill
+      })
+    });
+
+    // Bivariate 2020 maps configuration
+    const Hungary_no2_2020_bivariate = new ol.layer.Tile({
+      title: "NO<sub>2</sub> 2020 Bivariate",
+      visible: false,
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: {
+          "LAYERS": "gisgeoserver_12:Hungary_no2_2020_bivariate",
+          "STYLES": "Hungary_no2_2020_bivariate",
+          "TILED": true
+        },
+        serverType: "geoserver"
+      })
+    });
+    const Hungary_pm10_2020_bivariate = new ol.layer.Tile({
+      title: "PM<sub>10</sub> 2020 Bivariate",
+      visible: false,
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: {
+          "LAYERS": "gisgeoserver_12:Hungary_pm10_2020_bivariate",
+          "STYLES": "Hungary_no2_2020_bivariate",
+          "TILED": true
+        },
+        serverType: "geoserver"
+      })
+    });
+    const Hungary_pm2p5_2020_bivariate = new ol.layer.Tile({
+      title: "PM<sub>2.5</sub> 2020 Bivariate",
+      visible: false,
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: {
+          "LAYERS": "gisgeoserver_12:Hungary_pm2p5_2020_bivariate",
+          "STYLES": "Hungary_no2_2020_bivariate",
+          "TILED": true
+        },
+        serverType: "geoserver"
+      })
+    });
+    // Group all bivariate 2020 layers together
+    const bivariate2020 = new ol.layer.Group({
+      title: "Bivariate",
+      visible: true,
+      fold: "close",
+      layers: [
+        Hungary_no2_2020_bivariate,
+        Hungary_pm10_2020_bivariate,
+        Hungary_pm2p5_2020_bivariate
+      ]
+    });
+
+    // Average pollutant 2022 maps configuration
+    const Hungary_average_no2_2022 = new ol.layer.Tile({
+      title: "NO<sub>2</sub> 2022 Average",
+      visible: false,
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: {
+          "LAYERS": "gisgeoserver_12:Hungary_average_no2_2022",
+          "STYLES": "Hungary_average_no2_2022",
+          "TILED": true
+        },
+        serverType: "geoserver"
+      })
+    });
+    const Hungary_average_pm10_2022 = new ol.layer.Tile({
+      title: "PM<sub>10</sub> 2022 Average",
+      visible: false,
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: {
+          "LAYERS": "gisgeoserver_12:Hungary_average_pm10_2022",
+          "STYLES": "Hungary_average_no2_2022",
+          "TILED": true
+        },
+        serverType: "geoserver"
+      })
+    });
+    const Hungary_average_pm2p5_2022 = new ol.layer.Tile({
+      title: "PM<sub>2.5</sub> 2022 Average",
+      visible: false,
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: {
+          "LAYERS": "gisgeoserver_12:Hungary_average_pm2p5_2022",
+          "STYLES": "Hungary_average_no2_2022",
+          "TILED": true
+        },
+        serverType: "geoserver"
+      })
+    });
+    // Group all average pollutant 2022 layers together
+    const average_pollutant_maps_2022 = new ol.layer.Group({
+      title: "Average Pollutant Maps",
+      visible: true,
+      fold: "close",
+      layers: [
+        Hungary_average_no2_2022,
+        Hungary_average_pm10_2022,
+        Hungary_average_pm2p5_2022
+      ]
+    });
+
+    // Annual average difference maps configuration
+    const HungaryAADmap2022no2 = new ol.layer.Tile({
+      title: "NO<sub>2</sub> 2022 AAD Map",
+      visible: false,
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: {
+          "LAYERS": "gisgeoserver_12:HungaryAADmap2022no2",
+          "STYLES": "Hungary_no2_2017-2021_AAD_map_2022",
+          "TILED": true
+        },
+        serverType: "geoserver"
+      })
+    });
+    const HungaryAADmap2022pm10 = new ol.layer.Tile({
+      title: "PM<sub>10</sub> 2022 AAD Map",
+      visible: false,
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: {
+          "LAYERS": "gisgeoserver_12:HungaryAADmap2022pm10",
+          "STYLES": "Hungary_no2_2017-2021_AAD_map_2022",
+          "TILED": true
+        },
+        serverType: "geoserver"
+      })
+    });
+    const HungaryAADmap2022pm2p5 = new ol.layer.Tile({
+      title: "PM<sub>2.5</sub> 2022 AAD Map",
+      visible: false,
+      source: new ol.source.TileWMS({
+        url: wmsUrl,
+        params: {
+          "LAYERS": "gisgeoserver_12:HungaryAADmap2022pm25",
+          "STYLES": "Hungary_no2_2017-2021_AAD_map_2022",
+          "TILED": true
+        },
+        serverType: "geoserver"
+      })
+    });
+    // Group all annual average difference layers together
+    const annualaveragedifference = new ol.layer.Group({
+      title: "Annual Average Difference",
+      visible: true,
+      fold: "close",
+      layers: [
+        HungaryAADmap2022no2,
+        HungaryAADmap2022pm10,
+        HungaryAADmap2022pm2p5
+      ]
+    });
+
+    // Create the main map instance
+    const map = new ol.Map({
+      target: "map", // Target HTML element ID
+      layers: [baseMaps, countryLayerOutline, countryLayerFilled, bivariate2020, average_pollutant_maps_2022, annualaveragedifference], // Add all layer groups to the map
+      view: new ol.View({
+        center: ol.proj.fromLonLat([19.5033, 47.1625]), // Set initial center coordinates
+        zoom: initialZoom // Set initial zoom level
+      })
+    });
+
+    // Get the map controls container element
+    const mapControlsContainer = document.getElementById('map-controls');
+
+    // Custom full screen control with toggle functionality
+    class CustomFullScreenControl extends ol.control.FullScreen {
+      constructor(options) {
+        super(options);
+        const button = this.element.querySelector('button'); // Get the button element
+        button.innerHTML = '<i class="bi bi-arrows-fullscreen"></i>'; // Set initial icon
+        button.addEventListener('click', () => { // Add click event listener
+          if (!document.fullscreenElement) { // If not in fullscreen mode
+            document.documentElement.requestFullscreen(); // Enter fullscreen
+          } else {
+            document.exitFullscreen(); // Exit fullscreen
+          }
+        });
+        document.addEventListener('fullscreenchange', () => { // Listen for fullscreen changes
+          if (document.fullscreenElement) { // If in fullscreen mode
+            button.innerHTML = '<i class="bi bi-fullscreen-exit"></i>'; // Change to exit icon
+          } else {
+            button.innerHTML = '<i class="bi bi-arrows-fullscreen"></i>'; // Change to enter icon
+          }
+        });
+      }
+    }
+    // Add the custom fullscreen control to the map
+    map.addControl(new CustomFullScreenControl({ target: mapControlsContainer }));
+
+    // Custom recenter control to reset map view to initial position
+    class RecenterControl extends ol.control.Control {
+      constructor(opt_options) {
+        const options = opt_options || {}; // Set default options
+        const button = document.createElement('button'); // Create button element
+        button.innerHTML = '<i class="bi bi-crosshair"></i>'; // Set button icon
+        button.title = 'Recenter map'; // Set button tooltip
+        const element = document.createElement('div'); // Create container element
+        element.className = 'ol-control ol-recenter ol-unselectable'; // Add CSS classes
+        element.appendChild(button); // Add button to container
+        super({
+          element: element,
+          target: mapControlsContainer // Set target container
+        });
+        button.addEventListener('click', () => { // Add click event listener
+          map.getView().setCenter(ol.proj.fromLonLat(initialCoordinates)); // Reset center coordinates
+          map.getView().setZoom(initialZoom); // Reset zoom level
+        }, false);
+      }
+    }
+    // Add the recenter control to the map
+    map.addControl(new RecenterControl({ target: mapControlsContainer }))
+
+    // Add additional standard map controls
+    map.addControl(new ol.control.ScaleLine()); // Add scale line control
+    map.addControl(new ol.control.MousePosition({ // Add mouse position control
+      coordinateFormat: ol.coordinate.createStringXY(4), // Format coordinates to 4 decimal places
+      projection: 'EPSG:4326', // Use WGS84 projection
+      className: 'ol-mouse-position custom-mouse-coords', // Custom CSS class
+      placeholder: '0.0000, 0.0000', // Placeholder text when no coordinates
+      target: document.getElementById('mouse-coords-container') // Target container element
+    }));
+
+    // Custom Layer Switcher Implementation for managing layer visibility and opacity
+    class CustomLayerSwitcherButton {
+      constructor(map) {
+        this.map = map; // Store map reference
+        this.init(); // Initialize the layer switcher
+      }
+
+      init() {
+        // Create main container element
+        const container = document.createElement('div');
+        container.className = 'custom-layer-switcher';
+
+        // Create toggle button element
+        const button = document.createElement('button');
+        button.innerHTML = '<i class="bi bi-layers"></i>'; // Set layers icon
+        container.appendChild(button);
+
+        // Create menu container element
+        const menu = document.createElement('div');
+        menu.className = 'layer-switcher-menu';
+        container.appendChild(menu);
+
+        // Add container to map controls
+        const mapControls = document.getElementById('map-controls');
+        mapControls.appendChild(container);
+
+        // Toggle menu visibility with border management
+        button.addEventListener('click', (e) => {
+          e.preventDefault(); // Prevent default button behavior
+
+          const isMenuVisible = menu.style.display === 'block'; // Check if menu is currently visible
+
+          if (isMenuVisible) {
+            // Close menu with transition effects
+            menu.style.display = 'none';
+            container.classList.remove('menu-open');
+            container.classList.add('menu-closed');
+
+            // Remove transition class after animation completes
+            setTimeout(() => {
+              container.classList.remove('menu-closed');
+              button.blur(); // Remove focus from button
+            }, 150);
+          } else {
+            // Open menu with transition effects
+            menu.style.display = 'block';
+            container.classList.add('menu-open');
+            container.classList.remove('menu-closed');
+          }
+        });
+
+        // Close menu when clicking outside of it
+        document.addEventListener('click', (e) => {
+          if (!container.contains(e.target)) { // If click is outside container
+            menu.style.display = 'none'; // Hide menu
+            container.classList.remove('menu-open'); // Remove open class
+            button.blur(); // Remove focus from button
+          }
+        });
+
+        // Define the layer groups for the menu structure
+        const groups = [
+          {
+            title: 'Annual average 2022', // Group title
+            layers: average_pollutant_maps_2022.getLayers().getArray() // Get layers from group
+          },
+          {
+            title: 'Annual average difference 2022-2017',
+            layers: annualaveragedifference.getLayers().getArray()
+          },
+          {
+            title: 'Bivariate 2020',
+            layers: bivariate2020.getLayers().getArray()
+          },
+          {
+            title: 'Hungary Outline',
+            layers: [countryLayerFilled, countryLayerOutline] // Static layer array
+          }
+        ];
+
+        // Get base maps layers array
+        const baseMapsGroup = baseMaps.getLayers().getArray();
+
+        // Get legend container elements
+        const legendContainer = document.getElementById('map-legend');
+        const legendImg = document.getElementById('legend-img');
+
+        // Render layer groups in the menu
+        groups.forEach((group, groupIndex) => {
+          const groupDiv = document.createElement('div'); // Create group container
+          groupDiv.className = 'layer-group';
+
+          // Create clickable group title
+          const titleDiv = document.createElement('div');
+          titleDiv.className = 'layer-group-title clickable';
+          titleDiv.innerHTML = group.title; // Set group title text
+          titleDiv.dataset.groupIndex = groupIndex; // Store group index
+
+          // Create container for group layers (initially hidden)
+          const layersContainer = document.createElement('div');
+          layersContainer.className = 'layers-container';
+          layersContainer.style.display = 'none'; // Hide by default
+
+          // Add click handler for group title to toggle visibility
+          titleDiv.addEventListener('click', () => {
+            const isExpanded = layersContainer.style.display === 'block'; // Check if expanded
+
+            if (isExpanded) {
+              // Collapse the group
+              layersContainer.style.display = 'none';
+              titleDiv.classList.remove('active');
+            } else {
+              // Expand the group
+              layersContainer.style.display = 'block';
+              titleDiv.classList.add('active');
+            }
+          });
+
+          // Create UI elements for each layer in the group
+          group.layers.forEach(layer => {
+            const itemDiv = document.createElement('div'); // Layer item container
+            itemDiv.className = 'layer-item';
+
+            const headerDiv = document.createElement('div'); // Layer header container
+            headerDiv.className = 'layer-header';
+
+            // Create layer visibility checkbox
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.className = 'layer-checkbox';
+            checkbox.checked = layer.getVisible(); // Set initial state
+
+            // Create layer title span
+            const span = document.createElement('span');
+            span.className = 'layer-title';
+            span.innerHTML = layer.get('title'); // Get layer title
+
+            headerDiv.appendChild(checkbox); // Add checkbox to header
+            headerDiv.appendChild(span); // Add title to header
+            itemDiv.appendChild(headerDiv); // Add header to item
+
+            // Create opacity control container
+            const opacityDiv = document.createElement('div');
+            opacityDiv.className = 'opacity-controls';
+
+            // Create opacity slider
+            const opacitySlider = document.createElement('input');
+            opacitySlider.type = 'range';
+            opacitySlider.min = 0; // Minimum opacity value
+            opacitySlider.max = 1; // Maximum opacity value
+            opacitySlider.step = 0.05; // Opacity step increment
+            opacitySlider.value = layer.getOpacity(); // Set initial opacity value
+            opacitySlider.className = 'opacity-slider';
+
+            opacitySlider.disabled = !layer.getVisible(); // Disable if layer not visible
+            if (layer.getVisible()) { // If layer is visible
+              opacitySlider.classList.add('active-layer-slider'); // Add active styling
+            }
+
+            // Create opacity value display
+            const opacityValue = document.createElement('span');
+            opacityValue.className = 'opacity-value';
+            opacityValue.textContent = Math.round(layer.getOpacity() * 100) + '%'; // Display as percentage
+
+            // Function to update legend display for a given group
+            function updateLegend(group, legendSrc, legendAlt) {
+              // Check if any layer in the group is currently visible
+              const anyActive = group.getLayers().getArray().some(l => l.getVisible());
+
+              if (anyActive) { // If any layer is active
+                legendImg.src = legendSrc; // Set legend image source
+                legendImg.alt = legendAlt; // Set legend image alt text
+                legendContainer.style.display = 'block'; // Show legend container
+              } else {
+                legendImg.src = ''; // Clear legend image
+                legendImg.alt = ''; // Clear alt text
+                legendContainer.style.display = 'none'; // Hide legend container
+              }
+            }
+
+            // Add event listener for checkbox changes
+            checkbox.addEventListener('change', (e) => {
+              const isActive = e.target.checked; // Get new checkbox state
+
+              if (isActive) {
+                // Deactivate ALL layers from OTHER groups (except Hungary Outline)
+                groups.forEach(otherGroup => {
+                  if (otherGroup.title !== group.title && otherGroup.title !== 'Hungary Outline') { // Skip current group and Hungary Outline
+                    otherGroup.layers.forEach(otherLayer => {
+                      otherLayer.setVisible(false); // Hide other layers
+                      // Find and update UI elements for other layers
+                      const otherItem = Array.from(document.querySelectorAll('.layer-item'))
+                        .find(i => i.querySelector('.layer-title')?.innerHTML === otherLayer.get('title'));
+                      if (otherItem) {
+                        const otherCheckbox = otherItem.querySelector('.layer-checkbox');
+                        const otherSlider = otherItem.querySelector('.opacity-slider');
+                        const otherValue = otherItem.querySelector('.opacity-value');
+                        if (otherCheckbox) otherCheckbox.checked = false; // Uncheck checkbox
+                        if (otherSlider) {
+                          otherSlider.disabled = true; // Disable slider
+                          otherSlider.classList.remove('active-layer-slider'); // Remove active styling
+                          otherSlider.style.background = ''; // Reset background
+                          otherSlider.value = 1; // Reset to full opacity
+                        }
+                        if (otherValue) otherValue.textContent = '100%'; // Reset value display
+                      }
+                    });
+                  }
+                });
+              }
+
+              // Set visibility for current layer
+              layer.setVisible(isActive);
+              opacitySlider.disabled = !isActive; // Enable/disable opacity slider
+
+              // Update slider styling based on active state
+              if (isActive) {
+                opacitySlider.classList.add('active-layer-slider'); // Add active styling
+              } else {
+                opacitySlider.classList.remove('active-layer-slider'); // Remove active styling
+                opacitySlider.style.background = ''; // Reset background
+              }
+
+              // Update legends based on group type
+              if (group.title === "Annual average 2022") {
+                updateLegend(average_pollutant_maps_2022, 'assets/img/AnnualAverage2022_legend.png', 'Annual average 2022 legend');
+              } else if (group.title === "Bivariate 2020") {
+                updateLegend(bivariate2020, 'assets/img/Bivariate_legend.png', 'Bivariate 2020 legend');
+              } else if (group.title === "Annual average difference 2022-2017") {
+                updateLegend(annualaveragedifference, 'assets/img/AAD_legend.png', 'AAD 2022-2017 legend');
+              }
+            });
+
+            // Add event listener for opacity slider changes
+            opacitySlider.addEventListener('input', () => {
+              const val = parseFloat(opacitySlider.value); // Get slider value
+              layer.setOpacity(val); // Set layer opacity
+              opacityValue.textContent = Math.round(val * 100) + '%'; // Update display value
+              if (checkbox.checked) { // If layer is active
+                const percent = val * 100; // Calculate percentage
+                // Update slider background to show progress
+                opacitySlider.style.background = `linear-gradient(to right, #2487ce ${percent}%, rgba(36,135,206,0.5) ${percent}%)`;
+              }
+            });
+
+            opacityDiv.appendChild(opacitySlider); // Add slider to opacity controls
+            opacityDiv.appendChild(opacityValue); // Add value display to opacity controls
+            itemDiv.appendChild(opacityDiv); // Add opacity controls to layer item
+
+            layersContainer.appendChild(itemDiv); // Add layer item to layers container
+          });
+
+          groupDiv.appendChild(titleDiv); // Add title to group
+          groupDiv.appendChild(layersContainer); // Add layers container to group
+          menu.appendChild(groupDiv); // Add group to menu
+        });
+
+        // Create base maps section
+        const baseGroupDiv = document.createElement('div');
+        baseGroupDiv.className = 'layer-group';
+
+        // Create base maps title
+        const baseTitle = document.createElement('div');
+        baseTitle.className = 'layer-group-title clickable';
+        baseTitle.textContent = 'Base Maps';
+
+        // Create container for base map layers
+        const baseLayersContainer = document.createElement('div');
+        baseLayersContainer.className = 'layers-container';
+        baseLayersContainer.style.display = 'none'; // Hide by default
+
+        // Add click handler for base maps title
+        baseTitle.addEventListener('click', () => {
+          const isExpanded = baseLayersContainer.style.display === 'block'; // Check if expanded
+
+          if (isExpanded) {
+            // Collapse base maps section
+            baseLayersContainer.style.display = 'none';
+            baseTitle.classList.remove('active');
+          } else {
+            // Expand base maps section
+            baseLayersContainer.style.display = 'block';
+            baseTitle.classList.add('active');
+          }
+        });
+
+        // Create UI elements for each base map
+        baseMapsGroup.forEach((layer, idx) => {
+          const baseDiv = document.createElement('div'); // Base map item container
+          baseDiv.className = 'base-map-item';
+
+          // Create radio button for base map selection
+          const radio = document.createElement('input');
+          radio.type = 'radio';
+          radio.name = 'base-map'; // Group radio buttons together
+          radio.className = 'base-map-radio';
+          radio.checked = layer.getVisible(); // Set initial state
+          radio.addEventListener('change', () => { // Add change event listener
+            baseMapsGroup.forEach(l => l.setVisible(false)); // Hide all base maps
+            layer.setVisible(true); // Show selected base map
+          });
+
+          // Create label for base map
+          const label = document.createElement('span');
+          label.textContent = layer.get('title'); // Set label text
+
+          baseDiv.appendChild(radio); // Add radio button to item
+          baseDiv.appendChild(label); // Add label to item
+          baseLayersContainer.appendChild(baseDiv); // Add item to container
+        });
+
+        baseGroupDiv.appendChild(baseTitle); // Add title to base group
+        baseGroupDiv.appendChild(baseLayersContainer); // Add container to base group
+        menu.appendChild(baseGroupDiv); // Add base group to menu
+      }
+    }
+
+    // Initialize the custom layer switcher
+    new CustomLayerSwitcherButton(map);
+
+  </script>
+  <!-- GN: End Map + Controls + Legends Configuration -->
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
