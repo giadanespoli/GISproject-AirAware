@@ -76,7 +76,9 @@
 
         
         <div class="col-lg-12">
-          <p>AirAware builds upon the open data infrastructure provided by the Copernicus Atmosphere Monitoring Service (CAMS), particularly leveraging the CAMS Air Quality Reanalysis datasets. 
+          <p>AirAware builds upon the open data infrastructure provided by the
+            <a href="https://atmosphere.copernicus.eu/" target="_blank" rel="noopener noreferrer">Copernicus Atmosphere Monitoring Service (CAMS)</a>
+            , particularly leveraging the <a href="https://ads.atmosphere.copernicus.eu/datasets/cams-europe-air-quality-reanalyses?tab=overview" target="_blank" rel="noopener noreferrer">Copernicus Atmosphere Monitoring Service (CAMS) Reanalysis</a> datasets. 
             These datasets integrate satellite observations, ground-based sensor measurements, and advanced atmospheric modeling to deliver consistent, long-term records of key air pollutants such as PM<sub>2.5</sub>, PM<sub>10</sub> and NO<sub>2</sub> across Europe.
             The project focuses on the period 2013-2022, extracting annual mean pollutant concentrations for Hungary by aggregating monthly data and complementing it with up-to-date land cover information from the European Space Agency. 
             This allows us to isolate pollutant levels specifically over urban and built-up areas, critical for assessing population exposure.
@@ -145,7 +147,7 @@
           </div>
           <div class="col-md-6 d-flex align-items-center">
             <p>To obtain air pollution concentrations, we use monthly aggregated data from the 
-              <a href="https://ads.atmosphere.copernicus.eu/datasets/cams-europe-air-quality-reanalyses?tab=overview" target="_blank" rel="noopener noreferrer">CAMS European air quality reanalyses</a>.
+              CAMS European air quality reanalyses.
               After downloading the NetCDF and GeoTIFF formats, the rasters are loaded into QGIS, reprojected to EPSG:4326, and clipped to the study area using an automated batch workflow. 
               December 2022 is processed separately to complete the annual series. 
               The monthly layers are then aggregated into annual means using the r.series tool in QGIS.

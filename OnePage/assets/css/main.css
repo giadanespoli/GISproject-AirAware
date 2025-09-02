@@ -12,29 +12,41 @@
 --------------------------------------------------------------*/
 /* Fonts */
 :root {
-  --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --heading-font: "Raleway",  sans-serif;
-  --nav-font: "Poppins",  sans-serif;
+  --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --heading-font: "Raleway", sans-serif;
+  --nav-font: "Poppins", sans-serif;
 }
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
-:root { 
-  --background-color: #ffffff; /* Background color for the entire website, including individual sections */
-  --default-color: #444444; /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #124265; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #2487ce; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
-  --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
-  --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+:root {
+  --background-color: #ffffff;
+  /* Background color for the entire website, including individual sections */
+  --default-color: #444444;
+  /* Default color used for the majority of the text content across the entire website */
+  --heading-color: #124265;
+  /* Color for headings, subheadings and title throughout the website */
+  --accent-color: #2487ce;
+  /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --surface-color: #ffffff;
+  /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
+  --contrast-color: #ffffff;
+  /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
 }
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
-  --nav-color: #124265;  /* The default color of the main navmenu links */
-  --nav-hover-color: #2487ce; /* Applied to main navmenu links when they are hovered over or active */
-  --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
-  --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
-  --nav-dropdown-color: #124265; /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: #2487ce; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+  --nav-color: #124265;
+  /* The default color of the main navmenu links */
+  --nav-hover-color: #2487ce;
+  /* Applied to main navmenu links when they are hovered over or active */
+  --nav-mobile-background-color: #ffffff;
+  /* Used as the background color for mobile navigation menu */
+  --nav-dropdown-background-color: #ffffff;
+  /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
+  --nav-dropdown-color: #124265;
+  /* Used for navigation links of the dropdown items in the navigation menu. */
+  --nav-dropdown-hover-color: #2487ce;
+  /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
@@ -86,7 +98,12 @@ a:hover {
   text-decoration: none;
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--heading-color);
   font-family: var(--heading-font);
 }
@@ -550,9 +567,9 @@ h1,h2,h3,h4,h5,h6 {
   pointer-events: none;
 }
 
-.footer > * {
+.footer>* {
   position: relative;
-  z-index: 1; 
+  z-index: 1;
 }
 
 .footer .footer-top {
@@ -751,28 +768,35 @@ h1,h2,h3,h4,h5,h6 {
 # Global Page Titles & Breadcrumbs
 --------------------------------------------------------------*/
 
-.page-title { 
+.page-title {
   padding: 120px 0;
   color: var(--default-color);
   text-align: center;
-  position: relative; /* sets positioning context for absolute children */
-  overflow: hidden; /* hides content overflowing the container */
+  position: relative;
+  /* sets positioning context for absolute children */
+  overflow: hidden;
+  /* hides content overflowing the container */
 }
 
 .page-title .bg-image {
-  position: absolute; /* positions the background relative to parent */
-  inset: 0; /* top, right, bottom, left set to 0 to cover entire area */
+  position: absolute;
+  /* positions the background relative to parent */
+  inset: 0;
+  /* top, right, bottom, left set to 0 to cover entire area */
   background-image: url('../img/AirAware-background.png');
-  background-size: cover; /* scales image to cover the container while keeping aspect ratio */
+  background-size: cover;
+  /* scales image to cover the container while keeping aspect ratio */
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0.3;
-  z-index: 0; /* places the image behind other content */
+  z-index: 0;
+  /* places the image behind other content */
 }
 
 .page-title .content {
   position: relative;
-  z-index: 1; /* places content above the background image */
+  z-index: 1;
+  /* places content above the background image */
 }
 
 .page-title h1 {
@@ -947,7 +971,7 @@ section,
 }
 
 .hero .icon-box .title a {
-  pointer-events: none; 
+  pointer-events: none;
   cursor: default;
   color: #444444;
   transition: 0.3s;
@@ -2073,7 +2097,7 @@ section,
 }
 
 
-/* GN: styles */
+/* GN: footer styles */
 
 #pollutants-info,
 #pm2p5-title,
@@ -2087,6 +2111,7 @@ section,
   align-items: center;
   gap: 6px;
 }
+
 .contact-person a {
   color: inherit;
   text-decoration: none;
@@ -2099,9 +2124,12 @@ section,
   color: inherit;
   text-decoration: none;
 }
+
 .footer-contact a[href^="mailto:"]:hover {
   text-decoration: underline;
 }
+
+/* GN: gif hover styles */
 
 #WHO-preview:hover {
   opacity: 0;
@@ -2109,4 +2137,346 @@ section,
 
 #CAMS-preview:hover {
   opacity: 0;
+}
+
+/* GN: webgis styles */
+
+/* map container */
+#map {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  /*overflow: hidden;*/
+}
+
+/* zoom button */
+.ol-zoom button {
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  border-radius: 2px;
+  background: #fff;
+  color: #444444;
+  padding: 0;
+  line-height: 1;
+  display: flex;
+  display: block;
+  border: none;
+}
+.ol-control.ol-zoom button:hover {
+  border: 0.25px solid #000;  
+  color: #000;
+  background-color: rgba(255, 255, 255, 0.9);   
+}
+.ol-control.ol-zoom {
+  top: 20px;
+  right: 10px;
+  background: none;
+  box-shadow: none;
+}
+
+/* map controls stack */
+#map-controls {
+  position: absolute;
+  top: 20px;
+  right: 10px; 
+  background: none;
+  box-shadow: none; 
+  display: flex;
+  flex-direction: column;  
+  gap: 10px;        
+  z-index: 996;
+  pointer-events: none;
+}
+#map-controls .ol-control,
+#map-controls .custom-layer-switcher {
+  pointer-events: auto;
+  margin: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;     
+  height: 30px;   
+}
+
+/* recenter button */
+.ol-recenter button {
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  border-radius: 2px;
+  background: #fff;
+  color: #444444;
+  padding: 0;
+  line-height: 1;
+  display: block;
+  border: none;
+}
+.ol-recenter button:hover {
+  border: 0.25px solid #000;  
+  color: #000; 
+  transition: all 0.15s ease-in-out;
+}
+.ol-recenter button:focus {
+  outline: none;
+}
+.ol-recenter {
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+  left: auto !important;
+  bottom: auto !important;
+  margin: 0 !important;
+  z-index: inherit;
+}
+
+/* fullscreen button */
+.ol-full-screen button {
+  top: 20px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  border-radius: 2px;
+  background: #fff;
+  color: #444444;
+  padding: 0;
+  line-height: 1;
+  display: block;
+  border: none;
+}
+.ol-full-screen button:hover {
+  border: 0.25px solid #000;  
+  color: #000; 
+  transition: all 0.15s ease-in-out;
+}
+.ol-full-screen button:focus {
+  outline: none;
+}
+.ol-full-screen {
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+  left: auto !important;
+  bottom: auto !important;
+  margin: 0 !important;
+  z-index: inherit;
+}
+
+/* layer-switcher button */
+.custom-layer-switcher>button {
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  border-radius: 2px;
+  background: #fff;
+  color: #444444;
+  padding: 0;
+  line-height: 1;
+  display: block;
+  border: none;
+}
+.custom-layer-switcher>button:hover {
+  border: 0.25px solid #000;  
+  color: #000; 
+  transition: all 0.15s ease-in-out;
+}
+.custom-layer-switcher>button:focus {
+  border: 0.25px solid #000;  
+  color: #000; 
+  transition: all 0.15s ease-in-out;
+}
+.custom-layer-switcher {
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
+  left: auto !important;
+  bottom: auto !important;
+  margin: 0 !important;
+  z-index: inherit;
+}
+
+.layer-switcher-menu {
+  display: none;
+  position: absolute;
+  top: 35px;
+  right: 0;
+  z-index: 10000;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  min-width: 220px;
+  max-height: 400px;
+  overflow-y: auto;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+.layer-group-title {
+  font-weight: 600;
+  margin-bottom: 5px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+.layer-group-title:hover {
+  color: #2487ce;
+}
+.layer-group-title.active {
+  color: #124265;
+  transition: color 0.2s ease;
+}
+.layers-container {
+  padding-left: 5px;
+  margin-left: 10px;
+}
+.layer-item,
+.base-map-item {
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.layer-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.opacity-controls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 20px;
+}
+.opacity-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  background: #444444; 
+}
+.opacity-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #444444;
+  position: relative;     
+  top: 50%;
+  border: none;
+  cursor: pointer;
+}
+.opacity-slider.active-layer-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  background: #2487ce; 
+}
+.opacity-slider.active-layer-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #2487ce;
+  position: relative;     
+  top: 50%;
+  border: none;
+  cursor: pointer;
+}
+.opacity-slider:disabled,
+.opacity-slider:disabled::-webkit-slider-thumb {
+  cursor: default !important;
+}
+.opacity-value {
+  min-width: 30px;
+  text-align: right;
+  font-size: 12px;
+}
+.base-map-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+.layer-header input[type="checkbox"],
+.base-map-item input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #2487ce;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background-color: #fff;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+#map-legend {
+  position: absolute;
+  bottom: 40px;
+  left: 10px;
+  display: none;
+  z-index: 1000;
+}
+#legend-img {
+  width: 400px;
+  height: auto;
+  display: block;
+}
+
+/* mouse position coordinates indicator */
+.ol-mouse-position.custom-mouse-coords {
+  box-sizing: content-box;
+  white-space: nowrap;
+  width: auto !important;
+  max-width: 220px !important;
+  height: auto !important;
+  padding: 6px 12px !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  line-height: 1.4;
+  pointer-events: none;
+  position: relative;
+  z-index: 1100;
+}
+#mouse-coords-container {
+  position: absolute;
+  bottom: 40px;
+  right: 10px;
+  max-width: none !important;
+  width: auto !important;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* base maps attributions */
+.ol-attribution {
+  height: 20px;
+  border-top: none !important;   
+  border-bottom: none !important; 
+  padding: 5px 5px !important;
+}
+.ol-attribution li {
+  display: inline !important;
+  margin: 0 2px !important;
+  font-size: 10px !important;
+  color: #444444 !important;
+  line-height: 1 !important;
+}
+.ol-attribution li:not(:last-child)::after {
+  content: " | ";  
+  color: #444444 !important;
+  margin: 0 2px !important;
 }
